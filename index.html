@@ -26,6 +26,16 @@
     
     <style>
 
+.icon-btn .material-icons {
+  color: black !important;
+}
+.icon-btn {
+  display: inline-flex;   /* ✅ mejor que inline-block */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
 
         
         .header-title-group {
@@ -740,7 +750,7 @@ flex: 0 0 calc(25% - 7.5px);
 }
 
 .icon-btn:hover {
-    transform: scale(1.5);
+    transform: scale(1.3);
     opacity: 0.8;
 }
 
@@ -1088,7 +1098,7 @@ flex: 0 0 calc(25% - 7.5px);
     class="btn-send" 
     style="display:none; margin: 10px auto;" 
     onclick="cancelarEdicion()">
-    Cancel
+    Cancelar
 </button>
         </form>
     </div>
@@ -1154,8 +1164,10 @@ flex: 0 0 calc(25% - 7.5px);
                         <th rowspan="2">Presentación</th>
                         <th colspan="14" class="th-sitio">Área en uso</th>
                         <th rowspan="2">Etiqueta</th>
-                        <th rowspan="2">SDS</th>
-                        <th rowspan="2" class="admin-only">Actions</th>
+                        <th rowspan="2">HDS</th>
+<th rowspan="2">Actualizada</th>
+<th rowspan="2">Publicada</th>
+                        <th rowspan="2" class="admin-only">Acciones</th>
                     </tr>
                     <tr>
                         <th><img src="1.png" class="table-picto-img" onerror="this.style.display='none'"></th>
@@ -1869,8 +1881,8 @@ const btnEtiqueta = (sustancia.palabra === "Ninguno" && (!sustancia.pictograms |
             <button class="icon-btn label" title="Ver etiqueta"
                 onclick="generarEtiqueta('${sustancia.firebaseKey}')"
                 style="flex-direction: column;">
-                <span class="material-icons">label</span>
-                <span class="icon-text">View</span>
+              <span class="material-icons" style="color:black;">local_offer</span>
+              
             </button>
         </td>
       `;
@@ -1880,26 +1892,25 @@ const btnEtiqueta = (sustancia.palabra === "Ninguno" && (!sustancia.pictograms |
 
         htmlContenido += `
             ${btnEtiqueta}
+<!-- ✅ SDS -->
 <td>
   <a href="#" 
     data-hds="${sustancia.hdsUrl || '#'}"
     class="icon-btn sds view-sds"
     title="Ver hoja de seguridad"
-    style="flex-direction: column;"
   >
-    <span class="material-icons">description</span>
-    <span class="icon-text">SDS</span>
+    <span class="material-icons" style="color:black;">picture_as_pdf</span>
   </a>
+</td>
 
-  <!-- ✅ FECHA ACTUALIZACIÓN -->
-  <div style="font-size:10px; margin-top:4px; color:#6b7280;">
-    <b>Act:</b> ${sustancia.pdfFecha || ""}
-  </div>
+<!-- ✅ ACTUALIZACIÓN -->
+<td style="font-size:11px; color:#6b7280;">
+  ${formatearFecha(sustancia.pdfFecha)}
+</td>
 
-  <!-- ✅ NUEVA FECHA PUBLICACIÓN -->
-  <div style="font-size:10px; color:#2563eb;">
-    <b>Pub:</b> ${sustancia.fechaPublicacion || ""}
-  </div>
+<!-- ✅ PUBLICACIÓN -->
+<td style="font-size:11px; color:#2563eb;">
+  ${formatearFecha(sustancia.fechaPublicacion)}
 </td>
 
         `;
@@ -1910,7 +1921,7 @@ const btnEtiqueta = (sustancia.palabra === "Ninguno" && (!sustancia.pictograms |
 <td style="white-space: nowrap;">
     <button class="icon-btn edit" title="Editar"
         onclick="cargarDatosEdicion('${sustancia.firebaseKey}')">
-        <span class="material-icons">edit</span>
+        <span class="material-icons">edit</span
     </button>
 
     <button class="icon-btn delete" title="Eliminar"
@@ -1952,8 +1963,8 @@ function obtenerEtiquetaFecha(fechaStr) {
         if(!sustancia) return;
 
         // Cambiar títulos e interfaz
-        document.getElementById('formFormTitle').innerText = "✏️ Edit Substance: " + sustancia.nombre;
-        document.getElementById('btnFormSubmit').innerText = "Update Substance";
+        document.getElementById('formFormTitle').innerText = "Editar sustancia: " + sustancia.nombre;
+        document.getElementById('btnFormSubmit').innerText = "Actualizar sustancia";
         document.getElementById('btnFormSubmit').style.backgroundColor = "var(--Advertencia-color)";
         document.getElementById('btnCancelEdit').style.display = "block";
 
@@ -2023,14 +2034,14 @@ function obtenerEtiquetaFecha(fechaStr) {
         const username = currentUser ? currentUser.user : "unknown_user";
 
         Swal.fire({
-            title: 'Are you sure?',
-            text: `You are about to delete "${nombreSustancia}". This action cannot be undone!`,
+            title: 'Estas seguro?',
+            text: `Se borrara "${nombreSustancia}". Y no podras recuperarla!`,
             icon: 'Advertencia',
             showCancelButton: true,
             confirmButtonColor: 'var(--Peligro-color)',
             cancelButtonColor: 'var(--audit-color)',
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'Cancel'
+            confirmButtonText: 'Confirmar',
+            cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
                 db.ref("sustancias/" + firebaseKey).remove()
@@ -2044,13 +2055,13 @@ function obtenerEtiquetaFecha(fechaStr) {
                             accion: "ELIMINACIÓN",
                             sustancia: nombreSustancia,
                             cas: casSustancia,
-                            detalles: "Remoción permanente del inventario activo por el administrador."
+                            detalles: "Eliminada."
                         });
 
                         Swal.fire({
                             icon: 'success',
-                            title: 'Deleted!',
-                            text: 'The substance has been successfully removed.',
+                            title: 'Borrada!',
+                            text: 'Se elimino de la base de datos la sustancia.',
                             timer: 1500,
                             showConfirmButton: false
                         });
@@ -2059,7 +2070,7 @@ function obtenerEtiquetaFecha(fechaStr) {
                         Swal.fire({
                             icon: 'error',
                             title: 'Error',
-                            text: 'Could not remove the substance from database.'
+                            text: 'No se pudo eliminar la sustancia de la base de datos.'
                         });
                     });
             }
@@ -3079,6 +3090,75 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 });
+function formatearFecha(fecha) {
+  if (!fecha) return "";
+
+  // Si viene tipo 2023-01-01
+  if (fecha.includes("-")) {
+    const partes = fecha.split("-");
+    return `${partes[2]}/${partes[1]}/${partes[0]}`; // DD/MM/YYYY
+  }
+
+  // Si ya viene DD/MM/YYYY
+  return fecha;
+}
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape") {
+
+    // ✅ 1. Si etiqueta abierta → cerrar
+    const etiqueta = document.getElementById("printArea");
+    if (etiqueta && etiqueta.style.display === "block") {
+      cerrarEtiqueta();
+      return; // 🔥 evita que siga ejecutando
+    }
+
+    // ✅ 2. Si está editando → cancelar edición
+    const editKey = document.getElementById("editFirebaseKey").value;
+    if (editKey) {
+      cancelarEdicion();
+      return;
+    }
+
+  }
+  document.addEventListener("keydown", function (e) {
+
+  // ✅ Detectar CTRL + tecla
+  if (e.ctrlKey) {
+
+    // 🔥 REGISTRO
+    if (e.key.toLowerCase() === "r") {
+      e.preventDefault();
+      const btn = document.getElementById('regTabBtn');
+      if (btn) switchWindow('registro-window', btn);
+    }
+
+    // 🔥 MATRIX
+    if (e.key.toLowerCase() === "m") {
+      e.preventDefault();
+      const btn = document.getElementById('vizTabBtn');
+      if (btn) switchWindow('visualizacion-window', btn);
+    }
+
+    // 🔥 DASHBOARD
+    if (e.key.toLowerCase() === "d") {
+      e.preventDefault();
+      abrirVentana('dashboard-window');
+    }
+
+    // 🔥 HISTORIAL
+    if (e.key.toLowerCase() === "h") {
+      e.preventDefault();
+      const btn = document.getElementById('auditTabBtn');
+      if (btn) switchWindow('auditoria-window', btn);
+    }
+
+  }
+
+});
+
+});
+
+
 </script>
 
 </body>
