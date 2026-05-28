@@ -1169,7 +1169,8 @@ flex: 0 0 calc(25% - 7.5px);
 <option value="Mt">Metrología</option>
   </select>
 <select id="filterAntiguedad" style="width:200px;">
-  <option value="">HDS Publicada</option>
+  <option value="">Fecha Publicada</option>
+   <option value="lt6m">Menos de 6 meses</option>
   <option value="6m">Más de 6 meses</option>
   <option value="1y">Más de 1 año</option>
   <option value="2y">Más de 2 años</option>
@@ -1300,22 +1301,27 @@ flex: 0 0 calc(25% - 7.5px);
  
 
 
-<div class="card-kpi" style="background:gray">
+<div class="card-kpi" style="background:#16a34a">
+  <h3 id="kpiLt6m">0</h3>
+  <p>&lt; 6 meses</p>
+</div>
+
+<div class="card-kpi" style="background:rgb(139, 219, 10)">
   <h3 id="kpi6m">0</h3>
   <p>+6 meses</p>
 </div>
 
-<div class="card-kpi" style="background:gray">
+<div class="card-kpi" style="background:rgba(223, 220, 23, 0.842)">
   <h3 id="kpi1y">0</h3>
   <p>+1 año</p>
 </div>
 
-<div class="card-kpi" style="background:gray">
+<div class="card-kpi" style="background:rgb(219, 125, 36)">
   <h3 id="kpi2y">0</h3>
   <p>+2 años</p>
 </div>
 
-<div class="card-kpi" style="background:gray">
+<div class="card-kpi" style="background:rgb(211, 21, 21)">
   <h3 id="kpi3y">0</h3>
   <p>+3 años</p>
 </div>
@@ -1881,10 +1887,11 @@ let antiguedadOK = true;
 if (antiguedadFiltro && s.fechaPublicacion) {
   const dias = calcularAntiguedad(s.fechaPublicacion);
 
-  if (antiguedadFiltro === "6m") antiguedadOK = dias > 180;
-  if (antiguedadFiltro === "1y") antiguedadOK = dias > 365;
-  if (antiguedadFiltro === "2y") antiguedadOK = dias > 730;
-  if (antiguedadFiltro === "3y") antiguedadOK = dias > 1095;
+  if (antiguedadFiltro === "lt6m") antiguedadOK = dias <= 180;
+  if (antiguedadFiltro === "6m")  antiguedadOK = dias > 180;
+  if (antiguedadFiltro === "1y")  antiguedadOK = dias > 365;
+  if (antiguedadFiltro === "2y")  antiguedadOK = dias > 730;
+  if (antiguedadFiltro === "3y")  antiguedadOK = dias > 1095;
 }
         const nombreOK = !nombreFiltro || 
             (
@@ -2881,11 +2888,11 @@ function actualizarDashboard() {
 
     let bajo = 0, medio = 0, alto = 0;
 
-    // ✅ ANTIGÜEDAD
-    let m6 = 0;
-    let y1 = 0;
-    let y2 = 0;
-    let y3 = 0;
+ let lt6 = 0;
+let m6  = 0;
+let y1  = 0;
+let y2  = 0;
+let y3  = 0;
 
     const lista = listaSustancias.map(s => {
         const riesgo = calcularRiesgo(s);
@@ -2963,26 +2970,25 @@ function actualizarDashboard() {
             conteoPictos[p.id] = (conteoPictos[p.id] || 0) + 1;
         });
 
-        // ✅ ANTIGÜEDAD (CORRECTA)
-        if (s.fechaPublicacion) {
+if (s.fechaPublicacion) {
+  const dias = calcularAntiguedad(s.fechaPublicacion);
 
-            const dias = calcularAntiguedad(s.fechaPublicacion);
-
-            if (dias > 1095) {
-                y3++;
-            } else if (dias > 730) {
-                y2++;
-            } else if (dias > 365) {
-                y1++;
-            } else if (dias > 180) {
-                m6++;
-            }
-
-        }
+  if (dias <= 180) {
+    lt6++;
+  } else if (dias <= 365) {
+    m6++;
+  } else if (dias <= 730) {
+    y1++;
+  } else if (dias <= 1095) {
+    y2++;
+  } else {
+    y3++;
+  }
+}
 
     });
 
-    // ✅ KPI ANTIGÜEDAD
+document.getElementById('kpiLt6m').innerText = lt6;
     document.getElementById('kpi6m').innerText = m6;
     document.getElementById('kpi1y').innerText = y1;
     document.getElementById('kpi2y').innerText = y2;
