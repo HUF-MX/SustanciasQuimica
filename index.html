@@ -834,6 +834,14 @@ flex: 0 0 calc(25% - 7.5px);
     vertical-align: middle;
 }
 
+.header-subtitle {
+  font-size: 11px;
+  color: #9ca3af;
+  margin-top: 2px;
+  letter-spacing: 0.5px;
+}
+
+
     </style>
 
 </head>
@@ -869,9 +877,14 @@ flex: 0 0 calc(25% - 7.5px);
         <div class="header-title-group">
             <img src="logo.png" alt="HUF Logo" onerror="this.style.display='none';">
             <h1>HUF MX - CONTROL DE SUSTANCIAS</h1>
-            <span style="font-size:11px; color:#9ca3af; letter-spacing:0.5px;">
+          
+   
+<span style="font-size:11px; color:#9ca3af; letter-spacing:0.5px;">
     Developed by Omar Amador
 </span>
+
+
+
         </div>
 
         <!-- DERECHA -->
@@ -894,9 +907,9 @@ flex: 0 0 calc(25% - 7.5px);
             <span class="material-icons">grid_view</span> MATRIX
         </button>
 
-                 <!-- <button id="bulkTabBtn" class="tab-btn admin-only" onclick="switchWindow('bulk-window', this)">
+                 <button id="bulkTabBtn" class="tab-btn admin-only" onclick="switchWindow('bulk-window', this)">
             <span class="material-icons">download</span> IMPORTAR ( OMI)
-        </button> -->
+        </button>
           
 <button id="auditTabBtn" class="tab-btn" onclick="abrirVentana('dashboard-window')">
     <span class="material-icons">timeline</span> DASHBOARD
@@ -932,13 +945,14 @@ flex: 0 0 calc(25% - 7.5px);
                     <label for="palabraAdvertencia">PALABRA DE ADVERTENCIA:</label>
                     <select id="palabraAdvertencia"class="campo-manual">
                         <option value="Peligro">PELIGRO</option>
-                        <option value="Advertencia">ADVERTENCIA</option>
-                        <option value="Ninguno">NINGUNA (No Peligroso)</option>
+                        <option value="Advertencia">ATENCION</option>
+                        <option value="Ninguno">NINGUNA</option>
                     </select>
                 </div>
                 <div class="field">
                     <label for="hdsFile" id="hdsLabel"class="campo-manual">CARGA (PDF):</label>
                     <input type="file" id="hdsFile" accept=".pdf" required>
+                    
                     
 
 
@@ -947,9 +961,10 @@ flex: 0 0 calc(25% - 7.5px);
                     
                     <div id="pdfStatus" class="pdf-status"></div>
                 </div>
+                
             </div>
 
-            <div class="form-group" style="grid-template-columns: 1fr 1fr 1fr;">
+            <div class="form-group" style="grid-template-columns: 1fr 1fr 1fr 1fr;">
                 <div class="field">
                     <label for="indicacionesPeligro">INDICACIONES DE PELIGRO:</label>
                     <textarea id="indicacionesPeligro" class="campo-auto" placeholder="Informacion del PDF..."></textarea>
@@ -963,6 +978,11 @@ flex: 0 0 calc(25% - 7.5px);
     <label for="direccionSDS">DATOS FABRICANTE/PROVEEDOR:</label>
     <textarea id="direccionSDS"class="campo-manual" placeholder="Escribe aqui..."></textarea>
 </div>
+<div class="field">
+  <label for="fechaPublicacion">FECHA DE PUBLICACIÓN:</label>
+  <input type="date" id="fechaPublicacion" class="campo-manual">
+</div>
+``
 
             </div>
 
@@ -1586,6 +1606,7 @@ const mapaPictos = {
         const timestampStr = new Date().toLocaleString();
 
         const guardarSustancia = (hdsUrl) => {
+            const fechaPublicacion = document.getElementById('fechaPublicacion').value;
 // 🧠 Obtener registro existente (si es edición)
 const registroExistente = listaSustancias.find(s => s.firebaseKey === editKey);
 
@@ -1618,6 +1639,7 @@ const registroSustancia = {
     areas: areasSeleccionadas,
     hdsUrl: hdsUrl,
     pdfFecha: pdfFechaFinal,
+    fechaPublicacion: fechaPublicacion, // ✅ NUEVO
     direccion: document.getElementById('direccionSDS').value,
 
 };
@@ -1861,7 +1883,6 @@ const btnEtiqueta = (sustancia.palabra === "Ninguno" && (!sustancia.pictograms |
 <td>
   <a href="#" 
     data-hds="${sustancia.hdsUrl || '#'}"
-    data-pdf="${sustancia.pdfBase64 || ''}"
     class="icon-btn sds view-sds"
     title="Ver hoja de seguridad"
     style="flex-direction: column;"
@@ -1870,11 +1891,17 @@ const btnEtiqueta = (sustancia.palabra === "Ninguno" && (!sustancia.pictograms |
     <span class="icon-text">SDS</span>
   </a>
 
-  <!-- ✅ FECHA -->
+  <!-- ✅ FECHA ACTUALIZACIÓN -->
   <div style="font-size:10px; margin-top:4px; color:#6b7280;">
-    ${sustancia.pdfFecha || ""}
+    <b>Act:</b> ${sustancia.pdfFecha || ""}
+  </div>
+
+  <!-- ✅ NUEVA FECHA PUBLICACIÓN -->
+  <div style="font-size:10px; color:#2563eb;">
+    <b>Pub:</b> ${sustancia.fechaPublicacion || ""}
   </div>
 </td>
+
         `;
 
         // ✅ ADMIN
