@@ -1,26 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chemical Substance Management System - SGA Labels</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
-    
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
-    <script src="auth.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-storage-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema de Gestion de Sustancias- HUF-MX</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-database-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-storage-compat.js"></script>
 
-    
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+``
 
 
     
@@ -768,6 +767,7 @@ flex: 0 0 calc(25% - 7.5px);
     border-radius: 8px;
     color: white;
     min-width: 150px;
+    max-height: 200px;
     text-align: center;
 }
 .card-kpi h3 {
@@ -851,12 +851,35 @@ flex: 0 0 calc(25% - 7.5px);
   letter-spacing: 0.5px;
 }
 
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+
+.campo-fecha {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  color: #374151;
+  background-color: #f9fafb;
+  transition: all 0.2s ease;
+}
+
+.campo-fecha:focus {
+  border-color: #2563eb;
+  outline: none;
+  background-color: #fff;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
 
     </style>
 
 </head>
 <body>
 
+    
 <div id="loginOverlay" class="login-overlay">
     <div class="login-card">
                <div class="logo-container">
@@ -990,9 +1013,10 @@ flex: 0 0 calc(25% - 7.5px);
 </div>
 <div class="field">
   <label for="fechaPublicacion">FECHA DE PUBLICACIÓN:</label>
-  <input type="date" id="fechaPublicacion" class="campo-manual">
+  <input type="text" id="fechaPublicacion" class="campo-fecha">
 </div>
-``
+
+
 
             </div>
 
@@ -1144,7 +1168,13 @@ flex: 0 0 calc(25% - 7.5px);
 <option value="Tc">Tool Crib</option>
 <option value="Mt">Metrología</option>
   </select>
-
+<select id="filterAntiguedad" style="width:200px;">
+  <option value="">HDS Publicada</option>
+  <option value="6m">Más de 6 meses</option>
+  <option value="1y">Más de 1 año</option>
+  <option value="2y">Más de 2 años</option>
+  <option value="3y">Más de 3 años</option>
+</select>
 
   <button onclick="limpiarFiltros()"  class="btn-send"
     style="width: 215px;">
@@ -1259,10 +1289,43 @@ flex: 0 0 calc(25% - 7.5px);
 
     <div id="dashboard-window" class="window-content" style="display:none;">
     
-    <h3>Dashboard de Riesgo</h3>
+    <h3>DASHBOARD</h3>
 
-    <!-- KPIs -->
-<div style="display:flex; gap:20px; flex-wrap:wrap; margin-bottom:15px;">
+   
+<h3 style="margin-top:30px; margin-bottom:10px;">
+  HOJAS DE SEGURIDAD
+</h3>
+
+     <div style="display:flex; gap:20px; flex-wrap:wrap; margin-top:30px;">
+ 
+
+
+<div class="card-kpi" style="background:gray">
+  <h3 id="kpi6m">0</h3>
+  <p>+6 meses</p>
+</div>
+
+<div class="card-kpi" style="background:gray">
+  <h3 id="kpi1y">0</h3>
+  <p>+1 año</p>
+</div>
+
+<div class="card-kpi" style="background:gray">
+  <h3 id="kpi2y">0</h3>
+  <p>+2 años</p>
+</div>
+
+<div class="card-kpi" style="background:gray">
+  <h3 id="kpi3y">0</h3>
+  <p>+3 años</p>
+</div>
+</div>
+
+<h3 style="margin-top:30px; margin-bottom:10px;">
+  SUSTANCIAS
+</h3>
+
+<div style="display:flex; gap:20px; flex-wrap:wrap; margin-top:50px;">
 
    <div class="card-kpi blue">
     <h3 id="kpiTotal">0</h3>
@@ -1286,24 +1349,32 @@ flex: 0 0 calc(25% - 7.5px);
     <h3 id="kpiAlto">0</h3>
     <p>Riesgo Alto</p>
     <button onclick="filtrarDashboard('alto')" class="btn-send">Ver</button>
-</div>
+    
 
 </div>
-
-    <!-- Gráfica + Top -->
-<div style="display:flex; gap:20px;">
-
-    <!-- IZQUIERDA -->
     <div>
         <div style="width:250px; height:250px;">
             <canvas id="graficaRiesgo"></canvas>
         </div>
 
-        <h4> Top Sustancias Peligrosas</h4>
+        
+    </div>
+</div>
+
+
+
+
+    <!-- Gráfica + Top -->
+<div style="display:flex; gap:20px;">
+    
+
+    <!-- IZQUIERDA -->
+
+<div style="margin-top:25px; display:flex; gap:20px; flex-wrap:wrap;">
+    <div style="flex:1; min-width:200px;">
+<h4> Top Sustancias Peligrosas</h4>
         <ul id="topPeligrosas"></ul>
     </div>
-<div style="margin-top:25px; display:flex; gap:20px; flex-wrap:wrap;">
-
     <!-- 🏭 TOP ÁREAS -->
     <div style="flex:1; min-width:200px;">
         <h4> Áreas más peligrosas</h4>
@@ -1320,8 +1391,12 @@ flex: 0 0 calc(25% - 7.5px);
 
 
 </div>
-    <!-- DERECHA (TABLA DINÁMICA) -->
-    <div style="flex:1;">
+   
+
+
+</div>
+<div style="margin-top:25px; display:flex; gap:20px; flex-wrap:wrap;">   
+
         <h4 id="tituloTablaDashboard">Resultados</h4>
         <table class="tabla-dashboard">
             <thead>
@@ -1334,7 +1409,6 @@ flex: 0 0 calc(25% - 7.5px);
             <tbody id="tablaDashboardBody"></tbody>
         </table>
     </div>
-
 </div>
 </div>
 
@@ -1416,6 +1490,12 @@ document.getElementById('filterArea').addEventListener('change', function() {
   actualizarTabla();
   actualizarDashboard();
 });
+
+document.getElementById('filterAntiguedad').addEventListener('change', function() {
+  actualizarTabla();
+  
+});
+
 
 const mapaPictos = {
     Flammable: "Inflamable",
@@ -1679,8 +1759,8 @@ const registroSustancia = {
                         cancelarEdicion();
                         Swal.fire({
                             icon: 'success',
-                            title: 'Substance Updated',
-                            text: 'Changes saved permanently to Firebase!',
+                            title: 'Sustancia Actualizada',
+                            text: 'Guardada en Base de datos',
                             timer: 2000,
                             showConfirmButton: false
                         });
@@ -1704,8 +1784,8 @@ const registroSustancia = {
 
                         Swal.fire({
                             icon: 'success',
-                            title: 'Substance Registered',
-                            text: 'The substance has been successfully added to Firebase!',
+                            title: 'Sustancia Registrada',
+                            text: 'La sustancia ha sido agregada exitosamente a base de datos!',
                             timer: 2500,
                             timerProgressBar: true,
                             showConfirmButton: false
@@ -1794,7 +1874,18 @@ function actualizarTabla() {
 
     // ✅ FILTRAR DATOS
     const filtradas = listaSustancias.filter(s => {
+const antiguedadFiltro = document.getElementById('filterAntiguedad')?.value || '';
 
+let antiguedadOK = true;
+
+if (antiguedadFiltro && s.fechaPublicacion) {
+  const dias = calcularAntiguedad(s.fechaPublicacion);
+
+  if (antiguedadFiltro === "6m") antiguedadOK = dias > 180;
+  if (antiguedadFiltro === "1y") antiguedadOK = dias > 365;
+  if (antiguedadFiltro === "2y") antiguedadOK = dias > 730;
+  if (antiguedadFiltro === "3y") antiguedadOK = dias > 1095;
+}
         const nombreOK = !nombreFiltro || 
             (
               (s.nombre && s.nombre.toLowerCase().includes(nombreFiltro)) ||
@@ -1815,7 +1906,7 @@ if (pictoFiltro === "SIN_PICTO") {
   pictogramaOK = s.pictograms && s.pictograms.some(p => p.id === pictoFiltro);
 }
 
-        return nombreOK && casOK && areaOK && pictogramaOK;
+        return nombreOK && casOK && areaOK && pictogramaOK && antiguedadOK;
     });
 
     // ✅ FUNCIÓN COLOR POR ANTIGÜEDAD
@@ -2286,7 +2377,12 @@ const hdsLink = el.getAttribute('data-hds');
 if (hdsLink && hdsLink !== "#") {
     window.open(hdsLink, "_blank");
 } else {
-    alert("No hay SDS disponible");
+   Swal.fire({
+  icon: 'info',
+  title: 'Sin HDS disponible',
+  text: 'No hay hoja de seguridad asociada a esta sustancia.',
+  confirmButtonColor: '#6b7280'
+});
 }
 ``
     });
@@ -2747,9 +2843,12 @@ document.getElementById('btnUploadPDFs').addEventListener('click', async functio
 
 
 function limpiarFiltros() {
+
   document.getElementById('filterNombre').value = '';
   document.getElementById('filterCAS').value = '';
   document.getElementById('filterArea').value = '';
+  document.getElementById('filterPicto').value = '';
+  document.getElementById('filterAntiguedad').value = '';
 
   filtroNombre = '';
   filtroCAS = '';
@@ -2782,19 +2881,25 @@ function actualizarDashboard() {
 
     let bajo = 0, medio = 0, alto = 0;
 
+    // ✅ ANTIGÜEDAD
+    let m6 = 0;
+    let y1 = 0;
+    let y2 = 0;
+    let y3 = 0;
+
     const lista = listaSustancias.map(s => {
         const riesgo = calcularRiesgo(s);
         return { ...s, riesgo };
     });
 
-    // ✅ DISTRIBUCIÓN
+    // ✅ DISTRIBUCIÓN DE RIESGO
     lista.forEach(s => {
         if (s.riesgo <= 5) bajo++;
         else if (s.riesgo <= 12) medio++;
         else alto++;
     });
 
-    // ✅ KPIs
+    // ✅ KPIs PRINCIPALES
     document.getElementById('kpiTotal').innerText = lista.length;
     document.getElementById('kpiBajo').innerText = bajo;
     document.getElementById('kpiMedio').innerText = medio;
@@ -2810,11 +2915,11 @@ function actualizarDashboard() {
 
     top.forEach(s => {
         const li = document.createElement('li');
-        li.innerHTML = ` <b>${s.nombre}</b> - ${s.riesgo}`;
+        li.innerHTML = `<b>${s.nombre}</b> - ${s.riesgo}`;
         ul.appendChild(li);
     });
 
-    // ✅ GRÁFICA
+    // ✅ GRÁFICA DE RIESGO
     if (window.grafica) window.grafica.destroy();
 
     window.grafica = new Chart(document.getElementById('graficaRiesgo'), {
@@ -2832,7 +2937,7 @@ function actualizarDashboard() {
         }
     });
 
-    // 🔥 ===== NUEVAS MÉTRICAS INDUSTRIALES =====
+    // 🔥 ===== MÉTRICAS AVANZADAS =====
 
     let totalRiesgo = 0;
     let maxRiesgo = 0;
@@ -2845,32 +2950,50 @@ function actualizarDashboard() {
 
         totalRiesgo += s.riesgo;
 
-        if (s.riesgo > maxRiesgo) {
-            maxRiesgo = s.riesgo;
-        }
+        if (s.riesgo > maxRiesgo) maxRiesgo = s.riesgo;
+        if (s.riesgo > 15) criticas++;
 
-        if (s.riesgo > 15) {
-            criticas++;
-        }
-
-        // ✅ ÁREAS (RIESGO TOTAL POR ÁREA)
+        // ✅ ÁREAS
         (s.areas || []).forEach(a => {
             conteoAreas[a] = (conteoAreas[a] || 0) + s.riesgo;
         });
 
-        // ✅ PICTOGRAMAS (FRECUENCIA)
+        // ✅ PICTOGRAMAS
         (s.pictograms || []).forEach(p => {
             conteoPictos[p.id] = (conteoPictos[p.id] || 0) + 1;
         });
+
+        // ✅ ANTIGÜEDAD (CORRECTA)
+        if (s.fechaPublicacion) {
+
+            const dias = calcularAntiguedad(s.fechaPublicacion);
+
+            if (dias > 1095) {
+                y3++;
+            } else if (dias > 730) {
+                y2++;
+            } else if (dias > 365) {
+                y1++;
+            } else if (dias > 180) {
+                m6++;
+            }
+
+        }
+
     });
 
-    // ✅ INDICADORES
-    const promedio = lista.length ? (totalRiesgo / lista.length).toFixed(1) : 0;
+    // ✅ KPI ANTIGÜEDAD
+    document.getElementById('kpi6m').innerText = m6;
+    document.getElementById('kpi1y').innerText = y1;
+    document.getElementById('kpi2y').innerText = y2;
+    document.getElementById('kpi3y').innerText = y3;
 
+    // ✅ PROMEDIO (por si luego lo quieres mostrar)
+    const promedio = lista.length
+        ? (totalRiesgo / lista.length).toFixed(1)
+        : 0;
 
-    
-
-    // ✅ TOP ÁREAS MÁS PELIGROSAS
+    // ✅ TOP ÁREAS
     const topAreas = Object.entries(conteoAreas)
         .sort((a, b) => b[1] - a[1])
         .slice(0, 5);
@@ -2878,33 +3001,29 @@ function actualizarDashboard() {
     const ulAreas = document.getElementById('topAreas');
     ulAreas.innerHTML = "";
 
+    topAreas.forEach(([area, score]) => {
 
-topAreas.forEach(([area, score]) => {
+        let color = "#10b981";
+        if (score > 100) color = "#dc2626";
+        else if (score > 50) color = "#f59e0b";
 
-    let color = "#10b981";
+        const nombreArea = mapaAreas[area] || area;
 
-    if (score > 100) color = "#dc2626";
-    else if (score > 50) color = "#f59e0b";
+        const li = document.createElement('li');
 
-    // ✅ USAR MAPA
-    const nombreArea = mapaAreas[area] || area;
-
-    const li = document.createElement('li');
-
-    li.innerHTML = `
+        li.innerHTML = `
         <div style="display:flex; justify-content:space-between;">
             <span style="color:${color}; font-weight:bold;">
                 ${nombreArea}
             </span>
             <span>${score}</span>
         </div>
-    `;
+        `;
 
-    ulAreas.appendChild(li);
-});
+        ulAreas.appendChild(li);
+    });
 
-
-    // ✅ TOP PICTOGRAMAS (TIPO DE RIESGO)
+    // ✅ TOP PICTOGRAMAS
     const topPictos = Object.entries(conteoPictos)
         .sort((a, b) => b[1] - a[1])
         .slice(0, 5);
@@ -2914,16 +3033,14 @@ topAreas.forEach(([area, score]) => {
 
     topPictos.forEach(([picto, total]) => {
         const li = document.createElement('li');
-      
-const nombrePicto = mapaPictos[picto] || picto;
-
-li.innerText = `${nombrePicto} - ${total}`;
-
+        const nombrePicto = mapaPictos[picto] || picto;
+        li.innerText = `${nombrePicto} - ${total}`;
         ulPictos.appendChild(li);
     });
 
-}
 
+
+}
 function abrirVentana(id) {
 
     // ocultar todas
@@ -3158,7 +3275,35 @@ document.addEventListener("keydown", function (e) {
 
 });
 
+function calcularAntiguedad(fechaStr) {
+  if (!fechaStr) return 0;
 
+  const partes = fechaStr.includes('-')
+    ? fechaStr.split('-') // formato input
+    : fechaStr.split('/'); // formato existente
+
+  let fecha;
+
+  if (fechaStr.includes('-')) {
+    // YYYY-MM-DD
+    fecha = new Date(partes[0], partes[1] - 1, partes[2]);
+  } else {
+    // DD/MM/YYYY
+    fecha = new Date(partes[2], partes[1] - 1, partes[0]);
+  }
+
+  const hoy = new Date();
+  const diffDias = (hoy - fecha) / (1000 * 60 * 60 * 24);
+
+  return diffDias;
+}
+
+flatpickr("#fechaPublicacion", {
+  dateFormat: "Y-m-d",
+  altInput: true,
+  altFormat: "d/m/Y",
+  weekNumbers: true
+});
 </script>
 
 </body>
