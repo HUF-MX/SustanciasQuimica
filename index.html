@@ -25,11 +25,26 @@
     
     <style>
 
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+
 .icon-btn .material-icons {
   color: black !important;
 }
 .icon-btn {
-  display: inline-flex;   /* ✅ mejor que inline-block */
+  display: inline-flex;   
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -39,18 +54,18 @@
         
         .header-title-group {
             display: flex;
-            align-items: center; /* Alinea verticalmente el logo y el texto */
-            gap: 15px;           /* Espacio entre el logo y el texto */
+            align-items: center; 
+            gap: 15px;           
         }
 
         .header-title-group img {
-            height: 50px;        /* Ajusta este valor al tamaño que prefieras */
-            width: 90px;         /* Mantiene la proporción del logo */
+            height: 50px;        
+            width: 90px;         
         }
 
         .header-title-group h1 {
-            margin: 0;           /* Elimina márgenes por defecto para mejor alineación */
-            font-size: 20px;     /* Ajusta el tamaño de fuente a tu gusto */
+            margin: 0;           
+            font-size: 20px;     
         }
 .logo-container { text-align: center; margin-bottom: 10px; }
         .logo-subtitle { 
@@ -94,7 +109,7 @@
             margin: 20px;
         }
 
-        /* ==================== MAIN LAUNCHER / TABS ==================== */
+        
         .launcher-tabs {
             display: flex;
             gap: 10px;
@@ -108,7 +123,7 @@
             color: #4a5568;
             border: none;
             padding: 12px 24px;
-            font-size: 15px;
+            font-size: 15px;  
             font-weight: bold;
             border-radius: 6px 6px 0 0;
             cursor: pointer;
@@ -142,7 +157,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ==================== FORMULARIO LAYOUT ==================== */
+        
         .form-group {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -260,7 +275,7 @@
 flex: 0 0 calc(25% - 7.5px);
         box-sizing: border-box;
         padding: 5px;
-        border: 1px solid #ccc; /* Opcional: para ver la matriz mejor */
+        border: 1px solid #ccc; 
         }
 
         .btn-submit {
@@ -301,7 +316,7 @@ flex: 0 0 calc(25% - 7.5px);
             font-weight: bold;
         }
 
-        /* ==================== TABLA ESTILO EXCEL ==================== */
+        
         .table-container {
             overflow-x: auto;
             margin-top: 10px;
@@ -371,7 +386,7 @@ flex: 0 0 calc(25% - 7.5px);
         .btn-action.btn-delete { background: #e74c3c; }
         .btn-action.btn-delete:hover { background: #c0392b; }
 
-        /* ==================== ESTILO DE LA ETIQUETA SGA ==================== */
+        
 #printArea {
  display: none;
  position: fixed;
@@ -507,7 +522,7 @@ flex: 0 0 calc(25% - 7.5px);
   left: 0;
   top: 0;
   width: 100%;
-  transform: none !important; /* 🔥 CLAVE */
+  transform: none !important; 
  }
 
  .label-actions-bar {
@@ -516,7 +531,7 @@ flex: 0 0 calc(25% - 7.5px);
 
 }
 
-        /* ==================== ESTILOS DE LOGIN ==================== */
+        
         .login-overlay {
             display: flex;
             position: fixed;
@@ -659,12 +674,12 @@ flex: 0 0 calc(25% - 7.5px);
         .user-info-bar header {
     width: 100%;
     display: flex;
-    justify-content: space-between; /* 🔥 separa izquierda y derecha */
+    justify-content: space-between; 
     align-items: center;
 }
 .btn-out {
-    padding: 10px 18px;        /* 🔥 más espacio interno */
-    min-width: 90px;           /* evita que se haga chiquito */
+    padding: 10px 18px;        
+    min-width: 90px;           
     font-size: 14px;
     border: none;
     border-radius: 6px;
@@ -672,7 +687,7 @@ flex: 0 0 calc(25% - 7.5px);
     color: white;
     cursor: pointer;
     font-weight: bold;
-    white-space: nowrap;       /* 🔥 evita que se rompa texto */
+    white-space: nowrap;       
 }
 
 
@@ -697,10 +712,10 @@ flex: 0 0 calc(25% - 7.5px);
         }
 
         .admin-only.visible, .reader-only.visible {
-            display: block;
+            display: initial;
         }
         
-        /* Tipo badge para estados de auditoría */
+        
         .badge {
             padding: 4px 8px;
             border-radius: 4px;
@@ -753,13 +768,13 @@ flex: 0 0 calc(25% - 7.5px);
     opacity: 0.8;
 }
 
-/* Colores */
+
 .icon-btn.edit {
-    color: #f59e0b; /* amarillo */
+    color: #f59e0b; 
 }
 
 .icon-btn.delete {
-    color: #dc2626; /* rojo */
+    color: #dc2626; 
 }
 
 .card-kpi {
@@ -771,15 +786,15 @@ flex: 0 0 calc(25% - 7.5px);
     text-align: center;
 }
 .card-kpi h3 {
-    color: white; /* 🔥 fuerza el número en blanco */
+    color: white; 
     margin: 0;
     font-size: 24px;
 }
 
-.card-kpi.blue { background: #2563eb; }   /* Total */
-.card-kpi.green { background: #10b981; }  /* Bajo */
-.card-kpi.orange { background: #f59e0b; } /* Medio */
-.card-kpi.red { background: #dc2626; }    /* Alto */
+.card-kpi.blue { background: #2563eb; }   
+.card-kpi.green { background: #10b981; }  
+.card-kpi.orange { background: #f59e0b; } 
+.card-kpi.red { background: #dc2626; }    
 .btn-send {
     margin-top: 8px;
     padding: 4px 8px;
@@ -824,22 +839,22 @@ flex: 0 0 calc(25% - 7.5px);
             margin-bottom: 15px; text-align: center; font-weight: bold;
         }
         .campo-manual {
-    background-color: #ffffff; /* gris claro */
+    background-color: #ffffff; 
 }
 
 .campo-auto {
-    background-color: #dbeafe88; /* azul claro */
+    background-color: #dbeafe88; 
 }
 
 .tab-btn {
     display: flex;
-    align-items: center;   /* ✅ centra vertical */
+    align-items: center;   
     justify-content: center;
-    gap: 8px;              /* espacio entre icono y texto */
+    gap: 8px;              
 }
 
 .tab-btn .material-icons {
-    font-size: 20px;       /* tamaño uniforme */
+    font-size: 20px;       
     line-height: 1;
     vertical-align: middle;
 }
@@ -906,7 +921,7 @@ flex: 0 0 calc(25% - 7.5px);
 <div id="userInfoBar" class="user-info-bar">
     <header style="display:flex; justify-content:space-between; align-items:center;">
 
-        <!-- IZQUIERDA -->
+        
         <div class="header-title-group">
             <img src="logo.png" alt="HUF Logo" onerror="this.style.display='none';">
             <h1>HUF MX - CONTROL DE SUSTANCIAS</h1>
@@ -920,7 +935,7 @@ flex: 0 0 calc(25% - 7.5px);
 
         </div>
 
-        <!-- DERECHA -->
+        
         <div style="display:flex; align-items:center; gap:10px;">
             <span class="user-badge-header" id="userDisplayBadge">User: Admin</span>
             <button class="btn-out" onclick="handleLogout()">Salir</button>
@@ -940,11 +955,9 @@ flex: 0 0 calc(25% - 7.5px);
             <span class="material-icons">grid_view</span> MATRIX
         </button>
 
-                 <!-- <button id="bulkTabBtn" class="tab-btn admin-only" onclick="switchWindow('bulk-window', this)">
-            <span class="material-icons">download</span> IMPORTAR ( OMI)
-        </button> -->
+                 
           
-<button id="auditTabBtn" class="tab-btn" onclick="abrirVentana('dashboard-window')">
+<button id="dashboardTabBtn" class="tab-btn" onclick="switchWindow('dashboard-window', this)">
     <span class="material-icons">timeline</span> DASHBOARD
 </button>
         <button id="auditTabBtn" class="tab-btn" onclick="switchWindow('auditoria-window', this)">
@@ -1129,13 +1142,13 @@ flex: 0 0 calc(25% - 7.5px);
 
     <div id="visualizacion-window" class="window-content">
         <h3>MATRIX DE SUSTANCIAS</h3>
-        <div style="margin-bottom:15px; display:flex; gap:10px; flex-wrap:wrap;">
+        <div style="margin-bottom:15px; display:flex; gap:10px; flex-wrap:nowrap; overflow-x:auto; align-items:center;">
 
-  <input type="text" id="filterNombre" placeholder="🔎 Nombre..." 
-    style="padding:4px; width:305px;">
+  <input type="text" id="filterNombre" placeholder="� Nombre..." 
+    style="padding:4px; width:220px; flex-shrink:0;">
 
-  <select id="filterPicto" style="width: 485px;">
-  <option value="">☣️ Todos...</option>
+  <select id="filterPicto" style="width: 480px; flex-shrink:0;">
+  <option value="">⚠️ Todos...</option>
   <option value="Flamable">Flamable</option>
   <option value="Corrosivo">Corrosivo</option>
   <option value="Oxidante">Oxidante</option>
@@ -1148,10 +1161,10 @@ flex: 0 0 calc(25% - 7.5px);
   <option value="SIN_PICTO">No peligrosas</option>
 </select>
 
-  <input type="text" id="filterCAS" placeholder="🔍 CAS..." 
-    style="padding:6px; width:315px;">
+  <input type="text" id="filterCAS" placeholder="🆔 CAS..." 
+    style="padding:6px; width:120px; flex-shrink:0;">
 
-<select id="filterArea" style="width: 615px;">
+<select id="filterArea" style="width: 630px; flex-shrink:0;">
     <option value="">📍 Todas las áreas</option>
 <option value="Pm">Producción Mecánica</option>
 <option value="MaM">Mantenimiento</option>
@@ -1168,8 +1181,8 @@ flex: 0 0 calc(25% - 7.5px);
 <option value="Tc">Tool Crib</option>
 <option value="Mt">Metrología</option>
   </select>
-<select id="filterAntiguedad" style="width:200px;">
-  <option value="">Fecha Publicada</option>
+<select id="filterAntiguedad" style="width:210px; flex-shrink:0;">
+  <option value="">📅 Fecha Publicada</option>
    <option value="lt6m">Menos de 6 meses</option>
   <option value="6m">Más de 6 meses</option>
   <option value="1y">Más de 1 año</option>
@@ -1178,7 +1191,7 @@ flex: 0 0 calc(25% - 7.5px);
 </select>
 
   <button onclick="limpiarFiltros()"  class="btn-send"
-    style="width: 215px;">
+    style="width: 100px; flex-shrink:0;">
     Limpiar
   </button>
 
@@ -1370,30 +1383,30 @@ flex: 0 0 calc(25% - 7.5px);
 
 
 
-    <!-- Gráfica + Top -->
+    
 <div style="display:flex; gap:20px;">
     
 
-    <!-- IZQUIERDA -->
+    
 
 <div style="margin-top:25px; display:flex; gap:20px; flex-wrap:wrap;">
     <div style="flex:1; min-width:200px;">
 <h4> Top Sustancias Peligrosas</h4>
         <ul id="topPeligrosas"></ul>
     </div>
-    <!-- 🏭 TOP ÁREAS -->
+    
     <div style="flex:1; min-width:200px;">
         <h4> Áreas más peligrosas</h4>
         <ul id="topAreas"></ul>
     </div>
 
-    <!--  PICTOGRAMAS -->
+    
     <div style="flex:1; min-width:200px;">
         <h4> Tipo de riesgo dominante</h4>
         <ul id="topPictos"></ul>
     </div>
 
-    <!-- 📊 INDICADORES -->
+    
 
 
 </div>
@@ -1443,7 +1456,7 @@ flex: 0 0 calc(25% - 7.5px);
 </div>
         </div>
         <div class="label-actions-bar">
-            <!-- <button class="btn-action" style="background:#10b981; padding: 10px 20px;" onclick="window.print()">Print Label</button> -->
+            
             <button class="btn-action" style="background:#6b7280; padding: 10px 20px;" onclick="cerrarEtiqueta()">Close</button>
         </div>
     </div>
@@ -1455,7 +1468,7 @@ flex: 0 0 calc(25% - 7.5px);
     
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
 
-    // Inicialización de Firebase con la base de datos especificada
+    
     const firebaseConfig = {
   apiKey: "AIzaSyCcGhsGOHyKqVgx1bbZbvzGX4H8q0efBuQ",
   authDomain: "sustanciasquimicas-1c7cd.firebaseapp.com",
@@ -1542,7 +1555,7 @@ const mapaPictos = {
         }
     }
 
-    // Lector local de PDFs para evitar conflictos CORS
+    
     document.getElementById('hdsFile').addEventListener('change', function(e) {
         const file = e.target.files[0];
         const statusDiv = document.getElementById('pdfStatus');
@@ -1607,9 +1620,9 @@ const mapaPictos = {
                         }
                     }
 
-                    // if (numerosCAS.length > 0) {
-                    //     document.getElementById('cas').value = numerosCAS[0];
-                    // }
+                    
+                    
+                    
 
                     document.getElementById('indicacionesPeligro').value = frasesH.join('\n');
                     document.getElementById('consejosPrudencia').value = frasesP.join('\n');
@@ -1632,7 +1645,7 @@ const mapaPictos = {
         
     });
 
-    // Escuchador en tiempo real de Firebase para mantener la matriz sincronizada
+    
     db.ref("sustancias").on("value", (snapshot) => {
         listaSustancias = [];
         if (snapshot.exists()) {
@@ -1646,7 +1659,7 @@ const mapaPictos = {
         actualizarDashboard();
     });
 
-    // Escuchador en tiempo real para la Auditoría
+    
     db.ref("auditoria").on("value", (snapshot) => {
         const tbodyAudit = document.getElementById('auditTableBody');
         tbodyAudit.innerHTML = "";
@@ -1654,7 +1667,7 @@ const mapaPictos = {
         if (snapshot.exists()) {
             let logs = [];
             snapshot.forEach((childSnapshot) => {
-                logs.unshift({ ...childSnapshot.val(), key: childSnapshot.key }); // Los más recientes arriba
+                logs.unshift({ ...childSnapshot.val(), key: childSnapshot.key }); 
             });
 
             logs.forEach(log => {
@@ -1678,7 +1691,7 @@ const mapaPictos = {
         }
     });
 
-    // Registrar o actualizar sustancia
+    
     document.getElementById('sustanciaForm').addEventListener('submit', function(e) {
         e.preventDefault();
 
@@ -1705,13 +1718,13 @@ const mapaPictos = {
 
         const guardarSustancia = (hdsUrl) => {
             const fechaPublicacion = document.getElementById('fechaPublicacion').value;
-// 🧠 Obtener registro existente (si es edición)
+
 const registroExistente = listaSustancias.find(s => s.firebaseKey === editKey);
 
-// 📅 Fecha SOLO si hay PDF nuevo
+
 let pdfFechaFinal = "";
 
-// ✅ CASO 1: Se sube archivo nuevo → actualizar fecha
+
 if (fileInput.files.length > 0) {
     const ahora = new Date();
     pdfFechaFinal = ahora.toLocaleDateString('es-MX', {
@@ -1720,7 +1733,7 @@ if (fileInput.files.length > 0) {
         year: 'numeric'
     });
 } 
-// ✅ CASO 2: NO se sube PDF → conservar fecha anterior
+
 else if (registroExistente && registroExistente.pdfFecha) {
     pdfFechaFinal = registroExistente.pdfFecha;
 }
@@ -1737,7 +1750,7 @@ const registroSustancia = {
     areas: areasSeleccionadas,
     hdsUrl: hdsUrl,
     pdfFecha: pdfFechaFinal,
-    fechaPublicacion: fechaPublicacion, // ✅ NUEVO
+    fechaPublicacion: fechaPublicacion, 
     direccion: document.getElementById('direccionSDS').value,
 
 };
@@ -1747,12 +1760,12 @@ const registroSustancia = {
             }
 
             if (editKey) {
-                // ==================== MODO EDICIÓN ====================
+                
                 registroSustancia.id = listaSustancias.find(s => s.firebaseKey === editKey)?.id || registroSustancia.id;
 
                 db.ref("sustancias/" + editKey).set(registroSustancia)
                     .then(() => {
-                        // Crear registro en auditoría
+                        
                         db.ref("auditoria").push({
                             timestamp: timestampStr,
                             usuario: username,
@@ -1772,10 +1785,10 @@ const registroSustancia = {
                         });
                     });
             } else {
-                // ==================== MODO NUEVA ALTA ====================
+                
                 db.ref("sustancias").push(registroSustancia)
                     .then(() => {
-                        // Crear registro en auditoría
+                        
                         db.ref("auditoria").push({
                             timestamp: timestampStr,
                             usuario: username,
@@ -1830,9 +1843,9 @@ if (fileInput.files.length > 0) {
 
     });
 function obtenerColorFecha(fechaStr) {
-    if (!fechaStr) return "#7f8c8d"; // gris si no hay fecha
+    if (!fechaStr) return "#7f8c8d"; 
 
-    // Convertir DD/MM/YYYY a Date
+    
     const partes = fechaStr.split('/');
     if (partes.length !== 3) return "#7f8c8d";
 
@@ -1842,9 +1855,9 @@ function obtenerColorFecha(fechaStr) {
     const diffTime = hoy - fecha;
     const diffDias = diffTime / (1000 * 60 * 60 * 24);
 
-    if (diffDias <= 30) return "#16a34a";     // verde
-    if (diffDias <= 180) return "#f59e0b";    // amarillo
-    return "#dc2626";                         // rojo
+    if (diffDias <= 30) return "#16a34a";     
+    if (diffDias <= 180) return "#f59e0b";    
+    return "#dc2626";                         
 }
 
 const mapaAreas = {
@@ -1872,13 +1885,13 @@ function actualizarTabla() {
     const usuario = obtenerUsuarioActual();
     const esAdmin = usuario && usuario.rol === 'admin';
 
-    // ✅ LEER FILTROS
+    
     const nombreFiltro = document.getElementById('filterNombre')?.value.toLowerCase() || '';
     const casFiltro = document.getElementById('filterCAS')?.value.toLowerCase() || '';
     const areaFiltro = document.getElementById('filterArea')?.value || '';
     const pictoFiltro = document.getElementById('filterPicto')?.value || '';
 
-    // ✅ FILTRAR DATOS
+    
     const filtradas = listaSustancias.filter(s => {
 const antiguedadFiltro = document.getElementById('filterAntiguedad')?.value || '';
 
@@ -1916,7 +1929,7 @@ if (pictoFiltro === "SIN_PICTO") {
         return nombreOK && casOK && areaOK && pictogramaOK && antiguedadOK;
     });
 
-    // ✅ FUNCIÓN COLOR POR ANTIGÜEDAD
+    
     function obtenerColorFecha(fechaStr) {
         if (!fechaStr) return "#7f8c8d";
 
@@ -1928,12 +1941,12 @@ if (pictoFiltro === "SIN_PICTO") {
 
         const diffDias = (hoy - fecha) / (1000 * 60 * 60 * 24);
 
-        if (diffDias <= 30) return "#16a34a";   // Verde
-        if (diffDias <= 180) return "#f59e0b";  // Amarillo
-        return "#dc2626";                       // Rojo
+        if (diffDias <= 30) return "#16a34a";   
+        if (diffDias <= 180) return "#f59e0b";  
+        return "#dc2626";                       
     }
 
-    // ✅ PINTAR TABLA
+    
     filtradas.forEach((sustancia, index) => {
 
         const tr = document.createElement('tr');
@@ -1985,12 +1998,12 @@ const btnEtiqueta = (sustancia.palabra === "Ninguno" && (!sustancia.pictograms |
         </td>
       `;
 
-        // 🎯 COLOR DINÁMICO DE FECHA
+        
         const colorFecha = obtenerColorFecha(sustancia.pdfFecha);
 
         htmlContenido += `
             ${btnEtiqueta}
-<!-- ✅ SDS -->
+
 <td>
   <a href="#" 
     data-hds="${sustancia.hdsUrl || '#'}"
@@ -2001,25 +2014,25 @@ const btnEtiqueta = (sustancia.palabra === "Ninguno" && (!sustancia.pictograms |
   </a>
 </td>
 
-<!-- ✅ ACTUALIZACIÓN -->
+
 <td style="font-size:11px; color:#6b7280;">
   ${formatearFecha(sustancia.pdfFecha)}
 </td>
 
-<!-- ✅ PUBLICACIÓN -->
+
 <td style="font-size:11px; color:#2563eb;">
   ${formatearFecha(sustancia.fechaPublicacion)}
 </td>
 
         `;
 
-        // ✅ ADMIN
+        
         if (esAdmin) {
             htmlContenido += `
-<td style="white-space: nowrap;">
+<td class="admin-only visible" style="white-space: nowrap;">
     <button class="icon-btn edit" title="Editar"
         onclick="cargarDatosEdicion('${sustancia.firebaseKey}')">
-        <span class="material-icons">edit</span
+        <span class="material-icons">edit</span>
     </button>
 
     <button class="icon-btn delete" title="Eliminar"
@@ -2055,22 +2068,22 @@ function obtenerEtiquetaFecha(fechaStr) {
     return "Obsoleto";
 }
 
-// Cargar datos en el formulario para editar
+
     function cargarDatosEdicion(firebaseKey) {
         const sustancia = listaSustancias.find(s => s.firebaseKey === firebaseKey);
         if(!sustancia) return;
 
-        // Cambiar títulos e interfaz
+        
         document.getElementById('formFormTitle').innerText = "Editar sustancia: " + sustancia.nombre;
         document.getElementById('btnFormSubmit').innerText = "Actualizar sustancia";
         document.getElementById('btnFormSubmit').style.backgroundColor = "var(--Advertencia-color)";
         document.getElementById('btnCancelEdit').style.display = "block";
 
-        // Asignar llaves ocultas
+        
         document.getElementById('editFirebaseKey').value = firebaseKey;
         document.getElementById('existingHdsUrl').value = sustancia.hdsUrl;
 
-        // Llenar campos de texto
+        
         document.getElementById('nombre').value = sustancia.nombre;
         document.getElementById('cas').value = sustancia.cas;
         document.getElementById('presentacion').value = sustancia.presentacion;
@@ -2079,13 +2092,13 @@ function obtenerEtiquetaFecha(fechaStr) {
         document.getElementById('consejosPrudencia').value = sustancia.consejos || "";
         document.getElementById('direccionSDS').value = sustancia.direccion || "";
 
-        // Quitar la obligación del archivo PDF (file input) porque ya existe uno guardado
+        
         document.getElementById('hdsFile').required = false;
         document.getElementById('hdsLabel').innerText = "Update SDS (PDF) [Optional]:";
       
         document.getElementById('pdfStatus').style.color = "var(--accent-color)";
 
-        // Limpiar y re-marcar checkboxes de pictogramas
+        
         document.querySelectorAll('.picto-chk').forEach(cb => cb.checked = false);
         if(sustancia.pictograms) {
             sustancia.pictograms.forEach(p => {
@@ -2094,7 +2107,7 @@ function obtenerEtiquetaFecha(fechaStr) {
             });
         }
 
-        // Limpiar y re-marcar checkboxes de áreas
+        
         document.querySelectorAll('.area-chk').forEach(cb => cb.checked = false);
         if(sustancia.areas) {
             sustancia.areas.forEach(a => {
@@ -2103,7 +2116,7 @@ function obtenerEtiquetaFecha(fechaStr) {
             });
         }
 
-        // Redirigir a ventana de formulario
+        
         const regBtn = document.getElementById('regTabBtn');
         switchWindow('registro-window', regBtn);
     }
@@ -2119,14 +2132,14 @@ function obtenerEtiquetaFecha(fechaStr) {
         document.getElementById('btnCancelEdit').style.display = "none";
         
         document.getElementById('hdsFile').required = true;
-        document.getElementById('hdsLabel').innerText = "Upload SDS (PDF):";
+        document.getElementById('hdsLabel').innerText = "CARGA(PDF):";
         document.getElementById('pdfStatus').innerText = "";
 
         const vizBtn = document.getElementById('vizTabBtn');
         switchWindow('visualizacion-window', vizBtn);
     }
 
-    // Eliminar sustancia de Firebase de forma lógica/física con reporte de auditoría
+    
     function eliminarSustancia(firebaseKey, nombreSustancia, casSustancia) {
         const currentUser = obtenerUsuarioActual();
         const username = currentUser ? currentUser.user : "unknown_user";
@@ -2146,7 +2159,7 @@ function obtenerEtiquetaFecha(fechaStr) {
                     .then(() => {
                         const timestampStr = new Date().toLocaleString();
                         
-                        // Crear registro persistente en auditoría
+                        
                         db.ref("auditoria").push({
                             timestamp: timestampStr,
                             usuario: username,
@@ -2213,7 +2226,7 @@ function obtenerEtiquetaFecha(fechaStr) {
         document.getElementById('printArea').style.display = "none";
     }
 
-    // ==================== SISTEMA DE AUTENTICACIÓN ====================
+    
     async function handleLogin(event) {
     event.preventDefault();
 
@@ -2286,18 +2299,18 @@ function obtenerEtiquetaFecha(fechaStr) {
             document.getElementById('userInfoBar').classList.add('active');
             document.querySelector('.container').style.display = 'block';
             
-       const badge = document.getElementById('userDisplayBadge');
-
-if (badge) {
-    const rolTexto = usuario.rol === 'admin'
-        ? '👤'
-        : '👁️ ';
-
-    badge.textContent = `${usuario.user} | ${rolTexto}`;
-}
-
+            const badge = document.getElementById('userDisplayBadge');
+            if (badge) {
+                const rolTexto = usuario.rol === 'admin'
+                    ? '👤'
+                    : '👁️';
+                badge.textContent = `${usuario.user} | ${rolTexto}`;
+            }
             
             controlarAccesoPorRol(usuario.rol);
+            actualizarTabla();
+        } else {
+            mostrarLogin();
         }
     }
     
@@ -2319,7 +2332,7 @@ if (badge) {
         });
         
         elementosLector.forEach(el => {
-            if (esLector) {
+            if (esLector || esAdmin) {
                 el.classList.add('visible');
             } else {
                 el.classList.remove('visible');
@@ -2340,32 +2353,26 @@ if (badge) {
         const vizBtn = document.getElementById('vizTabBtn');
         const currentActiveWindow = Array.from(document.querySelectorAll('.window-content')).find(w => w.style.display === 'block');
         
-        // Redirección inicial limpia si el elemento activo se bloqueó por cambios de sesión
+        
         if (!currentActiveWindow) {
-            if (esAdmin && regBtn && regBtn.style.display !== 'none') {
-                switchWindow('registro-window', regBtn);
-            } else {
+            if (vizBtn && vizBtn.style.display !== 'none') {
                 switchWindow('visualizacion-window', vizBtn);
+            } else if (regBtn && regBtn.style.display !== 'none') {
+                switchWindow('registro-window', regBtn);
             }
         }
     }
     
 window.addEventListener('DOMContentLoaded', function() {
-  // 🔥 Auto-login
-  localStorage.setItem('usuarioActual', JSON.stringify({
-    user: "1",
-    rol: "admin"
-  }));
-
-  mostrarAplicacion();
+    mostrarAplicacion();
 });
 
 
-    // duplicate form handler removed; PDF base64 upload is handled in the main submit listener above.
+    
 
-    // 2. Visualización: Abrir el Base64 en una nueva ventana
+    
     function abrirPDF(base64Data) {
-        // Creamos una ventana nueva y escribimos un iframe con el data URI
+        
         const win = window.open("", "_blank");
         win.document.write(`
             <title>SDS Viewer</title>
@@ -2374,7 +2381,7 @@ window.addEventListener('DOMContentLoaded', function() {
         `);
     }
 
-    // Delegated handler for View SDS links: prefer embedded base64, fallback to stored URL
+    
     document.addEventListener('click', function(e) {
         const el = e.target.closest && e.target.closest('.view-sds');
         if (!el) return;
@@ -2394,7 +2401,7 @@ if (hdsLink && hdsLink !== "#") {
 ``
     });
 
-    // ------------------ Bulk import handlers ------------------
+    
     document.getElementById('btnParseExcel').addEventListener('click', function() {
         const f = document.getElementById('excelFile').files[0];
         if (!f) {
@@ -2416,14 +2423,14 @@ if (hdsLink && hdsLink !== "#") {
 
             const parsed = [];
             json.forEach((row, idx) => {
-                // normalize keys to lowercase
+                
                 const keys = Object.keys(row).reduce((acc, k) => { acc[k.toLowerCase().trim()] = row[k]; return acc; }, {});
 
                 const nombre = keys['nombre'] || keys['name'] || keys['sustancia'] || '';
                 const casCell = keys['cas'] || keys['numero cas'] || keys['number cas'] || '';
                 const presentacion = keys['presentacion'] || keys['presentation'] || '';
 
-                // pictograms: check p1..p9 or 1..9
+                
                 const pictogramIdMap = {
                     1: 'Flamable',
                     2: 'Corrosivo',
@@ -2443,9 +2450,9 @@ if (hdsLink && hdsLink !== "#") {
                     if (val && String(val).toLowerCase().trim() === 'x') pictograms.push({ id: pictogramIdMap[i], fileName: `${i}.png` });
                 }
 
-// ===============================
-// AREAS (ACTUALIZADO)
-// ===============================
+
+
+
 const areas = [];
 
 const areaMap = {
@@ -2471,10 +2478,10 @@ Object.keys(areaMap).forEach(a => {
   }
 });
 
-                // folder if provided
+                
                 const folderProvided = keys['folder'] || keys['carpeta'] || '';
 
-// Extract CAS values: match CAS-like patterns
+
 let casMatches = (String(casCell).match(/\d{1,7}-\d{1,7}-\d/g) || [])
   .map(s => s.trim());
 
@@ -2484,10 +2491,10 @@ if (casMatches.length === 0 && String(casCell).trim() !== '') {
 
 if (casMatches.length === 0) casMatches.push('');
 
-// ✅ AGRUPAR CAS EN UNA SOLA CELDA
+
 const casAgrupado = casMatches.join(', ');
 
-// ✅ SOLO UNA FILA
+
 parsed.push({
   index: parsed.length + 1,
   nombre,
@@ -2512,7 +2519,7 @@ parsed.push({
         const container = document.getElementById('bulkPreviewContainer');
         container.innerHTML = '';
 
-        // Group rows by original source index
+        
         const groups = {};
         rows.forEach(r => {
             const s = r.sourceIdx || 0;
@@ -2530,7 +2537,7 @@ parsed.push({
             groupDiv.style.padding = '8px';
             groupDiv.style.marginBottom = '8px';
 
-            // Header: name, presentation, pictos/areas summary, folder select and single file input
+            
             const header = document.createElement('div');
             header.style.display = 'flex';
             header.style.gap = '12px';
@@ -2562,7 +2569,7 @@ parsed.push({
 
             groupDiv.appendChild(header);
 
-            // List derived CAS rows
+            
             const list = document.createElement('table');
             list.style.width = '100%';
             list.style.marginTop = '8px';
@@ -2603,7 +2610,7 @@ async function processBulkImport(rows) {
   const batchId = 'batch_' + Date.now();
   const createdKeys = [];
 
-  // ✅ MAPA DE PDFs POR NÚMERO (1., 2., 3., etc)
+  
   const pdfMap = getPdfMapByPrefix();
 
   for (let g = 0; g < groups.length; g++) {
@@ -2613,7 +2620,7 @@ async function processBulkImport(rows) {
 
     const folder = group.querySelector('.group-folder-select').value || (g + 1);
 
-    // ✅ NUEVO MÉTODO DE PDF
+    
     let hdsUrl = '';
 
 const pdfFile = pdfMap[g + 1];
@@ -2625,7 +2632,7 @@ if (pdfFile) {
       const reader = new FileReader();
 
       reader.onload = function (event) {
-        resolve(event.target.result); // ✅ base64 completo
+        resolve(event.target.result); 
       };
 
       reader.onerror = function (err) {
@@ -2642,9 +2649,9 @@ if (pdfFile) {
   }
 }
 
-    // ===============================
-    // ✅ SOLO TOMAR UNA FILA POR GRUPO
-    // ===============================
+    
+    
+    
     const derived = rows.filter(r => Number(r.sourceIdx) === source);
 
     if (!derived || derived.length === 0) continue;
@@ -2685,9 +2692,9 @@ if (pdfFile) {
 
   }
 
-  // ===============================
-  // RESULTADO FINAL
-  // ===============================
+  
+  
+  
   if (createdKeys.length > 0) {
     Swal.fire({
       icon: 'success',
@@ -2723,7 +2730,7 @@ function getPdfMapFromFolder() {
   Array.from(files).forEach(file => {
     const name = file.name.toLowerCase();
 
-    // extraer número del archivo (1.pdf, 2.pdf, etc)
+    
     const match = name.match(/(\d+)/);
 
     if (match) {
@@ -2744,7 +2751,7 @@ function getPdfMapByPrefix() {
 
     const name = file.name.toLowerCase();
 
-    // ✅ detectar número al inicio (ej: 1.alcohol.pdf)
+    
     const match = name.match(/^(\d+)\./);
 
     if (match) {
@@ -2771,7 +2778,7 @@ document.getElementById('btnUploadPDFs').addEventListener('click', async functio
         return;
     }
 
-    // ✅ MAPEAR archivos por número inicial
+    
     const pdfMap = {};
     files.forEach(file => {
         const match = file.name.match(/^(\d+)\./);
@@ -2781,7 +2788,7 @@ document.getElementById('btnUploadPDFs').addEventListener('click', async functio
         }
     });
 
-    // ✅ Obtener sustancias actuales ORDENADAS
+    
     const snapshot = await db.ref("sustancias").once("value");
 
     if (!snapshot.exists()) {
@@ -2798,18 +2805,18 @@ document.getElementById('btnUploadPDFs').addEventListener('click', async functio
         });
     });
 
-    // 🔥 IMPORTANTE: ORDENAR por ID (para que coincida con fila)
+    
     sustancias.sort((a, b) => a.id - b.id);
 
     let actualizados = 0;
 
     for (let i = 0; i < sustancias.length; i++) {
 
-        const file = pdfMap[i + 1]; // ✅ 1-based index
+        const file = pdfMap[i + 1]; 
         if (!file) continue;
 
         try {
-            // ✅ Convertir PDF a base64
+            
             const base64Data = await new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.onload = e => resolve(e.target.result);
@@ -2817,7 +2824,7 @@ document.getElementById('btnUploadPDFs').addEventListener('click', async functio
                 reader.readAsDataURL(file);
             });
 
-            // ✅ NUEVA FECHA
+            
             const ahora = new Date();
             const fechaPDF = ahora.toLocaleDateString('es-MX', {
                 day: '2-digit',
@@ -2825,7 +2832,7 @@ document.getElementById('btnUploadPDFs').addEventListener('click', async functio
                 year: 'numeric'
             });
 
-            // ✅ Actualizar SOLO campos necesarios
+            
             await db.ref("sustancias/" + sustancias[i].key).update({
                 pdfBase64: base64Data,
                 hdsUrl: base64Data,
@@ -2899,20 +2906,20 @@ let y3  = 0;
         return { ...s, riesgo };
     });
 
-    // ✅ DISTRIBUCIÓN DE RIESGO
+    
     lista.forEach(s => {
         if (s.riesgo <= 5) bajo++;
         else if (s.riesgo <= 12) medio++;
         else alto++;
     });
 
-    // ✅ KPIs PRINCIPALES
+    
     document.getElementById('kpiTotal').innerText = lista.length;
     document.getElementById('kpiBajo').innerText = bajo;
     document.getElementById('kpiMedio').innerText = medio;
     document.getElementById('kpiAlto').innerText = alto;
 
-    // ✅ TOP 5 SUSTANCIAS
+    
     const top = [...lista]
         .sort((a, b) => b.riesgo - a.riesgo)
         .slice(0, 5);
@@ -2926,7 +2933,7 @@ let y3  = 0;
         ul.appendChild(li);
     });
 
-    // ✅ GRÁFICA DE RIESGO
+    
     if (window.grafica) window.grafica.destroy();
 
     window.grafica = new Chart(document.getElementById('graficaRiesgo'), {
@@ -2944,7 +2951,7 @@ let y3  = 0;
         }
     });
 
-    // 🔥 ===== MÉTRICAS AVANZADAS =====
+    
 
     let totalRiesgo = 0;
     let maxRiesgo = 0;
@@ -2960,12 +2967,12 @@ let y3  = 0;
         if (s.riesgo > maxRiesgo) maxRiesgo = s.riesgo;
         if (s.riesgo > 15) criticas++;
 
-        // ✅ ÁREAS
+        
         (s.areas || []).forEach(a => {
             conteoAreas[a] = (conteoAreas[a] || 0) + s.riesgo;
         });
 
-        // ✅ PICTOGRAMAS
+        
         (s.pictograms || []).forEach(p => {
             conteoPictos[p.id] = (conteoPictos[p.id] || 0) + 1;
         });
@@ -2994,12 +3001,12 @@ document.getElementById('kpiLt6m').innerText = lt6;
     document.getElementById('kpi2y').innerText = y2;
     document.getElementById('kpi3y').innerText = y3;
 
-    // ✅ PROMEDIO (por si luego lo quieres mostrar)
+    
     const promedio = lista.length
         ? (totalRiesgo / lista.length).toFixed(1)
         : 0;
 
-    // ✅ TOP ÁREAS
+    
     const topAreas = Object.entries(conteoAreas)
         .sort((a, b) => b[1] - a[1])
         .slice(0, 5);
@@ -3029,7 +3036,7 @@ document.getElementById('kpiLt6m').innerText = lt6;
         ulAreas.appendChild(li);
     });
 
-    // ✅ TOP PICTOGRAMAS
+    
     const topPictos = Object.entries(conteoPictos)
         .sort((a, b) => b[1] - a[1])
         .slice(0, 5);
@@ -3049,15 +3056,15 @@ document.getElementById('kpiLt6m').innerText = lt6;
 }
 function abrirVentana(id) {
 
-    // ocultar todas
+    
     document.querySelectorAll('.window-content').forEach(w => {
         w.style.display = "none";
     });
 
-    // mostrar la seleccionada
+    
     document.getElementById(id).style.display = "block";
 
-    // 👉 si es dashboard, actualizar
+    
     if (id === "dashboard-window") {
         actualizarDashboard();
     }
@@ -3167,7 +3174,7 @@ async function extraerCASdesdePDF(file) {
                 texto += strings.join(" ") + " ";
             }
 
-            // ✅ REGEX CAS
+            
             const regex = /\b\d{2,7}-\d{2}-\d\b/g;
 
             const encontrados = texto.match(regex);
@@ -3200,7 +3207,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const campoCAS = document.getElementById("cas");
 
                 if (campoCAS) {
-                    // ✅ llena TODOS los CAS directamente
+                    
                     campoCAS.value = casUnicos.join(", ");
                 }
 
@@ -3216,26 +3223,26 @@ document.addEventListener("DOMContentLoaded", () => {
 function formatearFecha(fecha) {
   if (!fecha) return "";
 
-  // Si viene tipo 2023-01-01
+  
   if (fecha.includes("-")) {
     const partes = fecha.split("-");
-    return `${partes[2]}/${partes[1]}/${partes[0]}`; // DD/MM/YYYY
+    return `${partes[2]}/${partes[1]}/${partes[0]}`; 
   }
 
-  // Si ya viene DD/MM/YYYY
+  
   return fecha;
 }
 document.addEventListener("keydown", function (e) {
   if (e.key === "Escape") {
 
-    // ✅ 1. Si etiqueta abierta → cerrar
+    
     const etiqueta = document.getElementById("printArea");
     if (etiqueta && etiqueta.style.display === "block") {
       cerrarEtiqueta();
-      return; // 🔥 evita que siga ejecutando
+      return; 
     }
 
-    // ✅ 2. Si está editando → cancelar edición
+    
     const editKey = document.getElementById("editFirebaseKey").value;
     if (editKey) {
       cancelarEdicion();
@@ -3245,30 +3252,31 @@ document.addEventListener("keydown", function (e) {
   }
   document.addEventListener("keydown", function (e) {
 
-  // ✅ Detectar CTRL + tecla
+  
   if (e.ctrlKey) {
 
-    // 🔥 REGISTRO
+    
     if (e.key.toLowerCase() === "r") {
       e.preventDefault();
       const btn = document.getElementById('regTabBtn');
       if (btn) switchWindow('registro-window', btn);
     }
 
-    // 🔥 MATRIX
+    
     if (e.key.toLowerCase() === "m") {
       e.preventDefault();
       const btn = document.getElementById('vizTabBtn');
       if (btn) switchWindow('visualizacion-window', btn);
     }
 
-    // 🔥 DASHBOARD
+    
     if (e.key.toLowerCase() === "d") {
       e.preventDefault();
-      abrirVentana('dashboard-window');
+      const btn = document.getElementById('dashboardTabBtn');
+      if (btn) switchWindow('dashboard-window', btn);
     }
 
-    // 🔥 HISTORIAL
+    
     if (e.key.toLowerCase() === "h") {
       e.preventDefault();
       const btn = document.getElementById('auditTabBtn');
@@ -3285,16 +3293,16 @@ function calcularAntiguedad(fechaStr) {
   if (!fechaStr) return 0;
 
   const partes = fechaStr.includes('-')
-    ? fechaStr.split('-') // formato input
-    : fechaStr.split('/'); // formato existente
+    ? fechaStr.split('-') 
+    : fechaStr.split('/'); 
 
   let fecha;
 
   if (fechaStr.includes('-')) {
-    // YYYY-MM-DD
+    
     fecha = new Date(partes[0], partes[1] - 1, partes[2]);
   } else {
-    // DD/MM/YYYY
+    
     fecha = new Date(partes[2], partes[1] - 1, partes[0]);
   }
 
