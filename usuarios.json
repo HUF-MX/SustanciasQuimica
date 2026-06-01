@@ -1,4 +1,8 @@
 [
-  { "user": "1", "pass": "1", "rol": "admin" },
-  { "user": "2", "pass": "2", "rol": "lector" }
+  { "user": "oamador", "pass": "omi", "rol": "admin" },
+    { "user": "ktirado", "pass": "Karen2026!", "rol": "admin" },
+     { "user": "zsanchez", "pass": "Zach2026!", "rol": "admin" },
+       { "user": "mortiz", "pass": "Mel2026!", "rol": "admin" },
+    { "user": "irodriguez", "pass": "Nacho2026!", "rol": "admin" },
+  { "user": "HUF", "pass": "Huf2026!", "rol": "lector" }
 ]
