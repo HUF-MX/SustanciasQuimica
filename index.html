@@ -1061,9 +1061,9 @@ thead th {
         </button>
 
                  
-                <!-- <button id="bulkTabBtn" class="tab-btn admin-only" onclick="switchWindow('bulk-window', this)">
+                 <button id="bulkTabBtn" class="tab-btn admin-only" onclick="switchWindow('bulk-window', this)">
             <span class="material-icons">download</span> IMPORTAR ( OMI)
-        </button>  -->
+        </button>  
           
 <button id="dashboardTabBtn" class="tab-btn" onclick="switchWindow('dashboard-window', this)">
     <span class="material-icons">timeline</span> DASHBOARD
@@ -2766,31 +2766,8 @@ async function processBulkImport(rows) {
     
     let hdsUrl = '';
 
-const pdfFile = pdfMap[g + 1];
-
-if (pdfFile) {
-
-  try {
-    const base64Data = await new Promise((resolve, reject) => {
-      const reader = new FileReader();
-
-      reader.onload = function (event) {
-        resolve(event.target.result); 
-      };
-
-      reader.onerror = function (err) {
-        reject(err);
-      };
-
-      reader.readAsDataURL(pdfFile);
-    });
 
 
-
-  } catch (err) {
-    console.error('Error reading PDF:', err);
-  }
-}
 
     
     
@@ -3295,6 +3272,7 @@ flatpickr("#fechaPublicacion", {
   altFormat: "d/m/Y",
   weekNumbers: true
 });
+
 </script>
 
 </body>
