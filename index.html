@@ -972,6 +972,15 @@ thead th {
     word-break: break-word; 
 }
 
+
+.highlight-picto {
+    background-color: VAR(--primary-color); !important;
+}
+
+.highlight-area {
+   background-color: VAR(--primary-color); !important;
+}
+
     </style>
 
 </head>
@@ -1963,6 +1972,9 @@ const mapaAreas = {
 
 function actualizarTabla() {
 
+document.querySelectorAll('#excelTable td, #excelTable th').forEach(cell => {
+    cell.classList.remove('highlight-picto', 'highlight-area');
+});
     const tbody = document.getElementById('tableBody');
     tbody.innerHTML = "";
 
@@ -2121,7 +2133,88 @@ const btnEtiqueta = (sustancia.palabra === "Ninguno" && (!sustancia.pictograms |
         tbody.appendChild(tr);
     });
 
+
+
+if (pictoFiltro && pictoFiltro !== "SIN_PICTO") {
+
+    const indexMap = {
+        Flamable: 0,
+        Corrosivo: 1,
+        Oxidante: 2,
+        Explosivo: 3,
+        Irritante: 4,
+        "Peligro Salud": 5,
+        Gas: 6,
+        Toxico: 7,
+        Ambiente: 8
+    };
+
+    const pictoIndex = indexMap[pictoFiltro];
+
+    if (pictoIndex !== undefined) {
+
+        document.querySelectorAll('#tableBody tr').forEach(row => {
+
+            const cells = row.querySelectorAll('td');
+
+           
+            const baseIndex = 2 + pictoIndex;
+
+            if (cells[baseIndex]) {
+                cells[baseIndex].classList.add('highlight-picto');
+            }
+
+        });
+    }
+}
+
+if (areaFiltro) {
+
+    const areaIndexMap = {
+        Pm: 0,
+        MaM: 1,
+        Pe: 2,
+        Mol: 3,
+        Iny: 4,
+        Lab: 5,
+        Of: 6,
+        MaE: 7,
+        Infr: 8,
+        Smed: 9,
+        SMT: 10,
+        Ar: 11,
+        Tc: 12,
+        Mt: 13
+    };
+
+    const areaIndex = areaIndexMap[areaFiltro];
+
+    if (areaIndex !== undefined) {
+
+        document.querySelectorAll('#tableBody tr').forEach(row => {
+
+            const cells = row.querySelectorAll('td');
+
+            const tieneColspan = row.querySelector('td[colspan]');
+
+            // índice base normal
+            let baseIndex = 13 + areaIndex;
+
+            // ✅ FIX: si hay colspan, ajustar índice
+            if (tieneColspan) {
+                const colspan = parseInt(tieneColspan.getAttribute('colspan')) || 0;
+                baseIndex = baseIndex - (colspan - 1);
+            }
+
+            if (cells[baseIndex]) {
+                cells[baseIndex].classList.add('highlight-area');
+            }
+
+        });
+    }
+}
     controlarAccesoPorRol(usuario ? usuario.rol : '');
+    
 }
     
 
