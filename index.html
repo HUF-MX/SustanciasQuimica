@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sistema de Gestion de Sustancias- HUF-MX</title>
+<title>HUF-MX Sustancias Quimicas</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -27,7 +27,7 @@
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
-  font-size: 20px;
+  font-size: 25px;
   display: inline-block;
   line-height: 1;
   text-transform: none;
@@ -38,9 +38,8 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.icon-btn .material-icons {
-  color: black !important;
-}
+
+
 .icon-btn {
   display: inline-flex;   
   flex-direction: column;
@@ -79,6 +78,10 @@
             --Peligro-color: #dc2626;
             --Advertencia-color: #f59e0b;
             --audit-color: #6b7280;
+            --huf: #aa2727;
+            --huf2: #1d64cec4;
+           
+
         }
 
 
@@ -100,7 +103,7 @@
 
         .container {
             max-width: 100%;
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.637);
             padding: 10px;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.08);
@@ -317,7 +320,7 @@ flex: 0 0 calc(25% - 7.5px);
 .mark-x {
     display: inline-block;
     padding: 5px 5px;
-    background: #264496;
+    background: var(--huf);
     color: white;
     border-radius: 6px;
     font-size: 12px;
@@ -328,14 +331,14 @@ flex: 0 0 calc(25% - 7.5px);
     transition: 0.2s;
 }
         .no-Peligro-text {
-            color: #7f8c8d;
-            font-style: italic;
-            font-size: 12px;
+            color: var(--huf2);
+            font-style: bold;
+            font-size: 16px;
         }
 
         .table-picto-img {
-            width: 38px;
-            height: 38px;
+            width: 50px;
+            height: 50px;
             display: block;
             margin: 0 auto;
         }
@@ -783,8 +786,8 @@ flex: 0 0 calc(25% - 7.5px);
 }
 
 .tab-btn .material-icons {
-    font-size: 20px;       
-    line-height: 1;
+    font-size: 25px;       
+    line-height: .5;
     vertical-align: middle;
 }
 
@@ -800,14 +803,11 @@ flex: 0 0 calc(25% - 7.5px);
   flex-direction: column;
   margin-bottom: 8px;
   gap: 2px;
-
-
-        
-            background: #ffffff;
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 15px;
-             border: 2px solid var(--border-color);
+  background: #ffffff;
+  padding: 12px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+  border: 2px solid var(--border-color);
   
 }
 
@@ -904,19 +904,19 @@ flex: 0 0 calc(25% - 7.5px);
 }
 .table-container {
     width: 100%;
-    max-height: 620px; /* altura con scroll vertical */
+    max-height: 620px; 
     overflow-x: auto;
     overflow-y: auto;
 }
 
-/* Tabla */
+
 #excelTable {
     width: 100%;
     min-width: 1200px;
     border-collapse: collapse;
 }
 
-/* Celdas */
+
 th, td {
     white-space: nowrap;
     text-align: center;
@@ -925,26 +925,26 @@ th, td {
   border: 1px solid var(--border-color);
 }
 
-/* Headers fijos */
+
 thead th {
     position: sticky;
     background: #635f5f;
 }
 
-/* Primera fila */
+
 thead tr:first-child th {
     top: 0;
     z-index: 3;
     
 }
 
-/* Segunda fila */
+
 thead tr:nth-child(2) th {
-    top: 25.9px; /* ajusta si cambia la altura */
+    top: 25.9px; 
     z-index: 5;
 }
 
-/* Opcional: mejora visual */
+
 thead th {
             background-color: var(--primary-color);
             color: white;
@@ -952,24 +952,24 @@ thead th {
 }
 
 #excelTable {
-    border-collapse: separate;   /* 👈 CAMBIO CLAVE */
+    border-collapse: separate;  
     border-spacing: 0;
 }
 
 .vertical-text {
     writing-mode: vertical-rl;
     text-orientation: mixed;
-    direction: rtl; /* 👈 esto reemplaza el rotate */
+    direction: rtl; 
 }
 #excelTable td:nth-child(2),
 #excelTable th:nth-child(2) {
-    white-space: normal;     /* ✅ permite salto */
-    word-break: break-word;  /* ✅ corta palabras largas */
+    white-space: normal;     
+    word-break: break-word;  
 }
 #excelTable td:nth-child(4),
 #excelTable th:nth-child(4) {
-    white-space: normal;     /* ✅ permite salto */
-    word-break: break-word;  /* ✅ corta palabras largas */
+    white-space: normal;    
+    word-break: break-word; 
 }
 
     </style>
@@ -1339,7 +1339,7 @@ thead th {
 <th class="vertical-text" title="Almacén Recibo">Almacen</th>
 <th class="vertical-text" title="Tool Crib">ToolCrib</th>
 <th class="vertical-text" title="Metrología">Metrología</th>
-``
+
                     </tr>
                 </thead>
                 <tbody id="tableBody">
@@ -2022,9 +2022,9 @@ if (pictoFiltro === "SIN_PICTO") {
 
         let htmlContenido = `
             <td>${index + 1}</td>
-            <td style="text-align: left; font-weight: bold;">
-                ${sustancia.nombre}
-            </td>
+<td style="text-align: left; font-weight: italic;">
+    ${sustancia.nombre}
+</td>
         `;
 
         if (sustancia.palabra === "Ninguno" && (!sustancia.pictograms || sustancia.pictograms.length === 0)) {
@@ -2042,10 +2042,12 @@ if (pictoFiltro === "SIN_PICTO") {
         }
 
         htmlContenido += `
-            <td style="color: #2980b9; font-weight: bold; white-space: pre-line;">
+            <td style="color: black; font-weight: italic; white-space: pre-line;">
                 ${sustancia.cas}
             </td>
-            <td>${sustancia.presentacion}</td>
+            <td style="color: black; font-weight: italic; white-space: pre-line;">
+                ${sustancia.presentacion}
+            </td>
         `;
 
         totalAreas.forEach(a => {
@@ -2055,13 +2057,13 @@ if (pictoFiltro === "SIN_PICTO") {
         });
 
 const btnEtiqueta = (sustancia.palabra === "Ninguno" && (!sustancia.pictograms || sustancia.pictograms.length === 0))
-    ? `<td><span style="color:#7f8c8d;">N/A</span></td>`
+    ? `<td><span style="color:var(--huf2);">N/A</span></td>`
     : `
         <td>
             <button class="icon-btn label" title="Ver etiqueta"
                 onclick="generarEtiqueta('${sustancia.firebaseKey}')"
                 style="flex-direction: column;">
-              <span class="material-icons" style="color:black;">local_offer</span>
+             <span class="material-icons" style="color: var(--huf2);">local_offer</span>
               
             </button>
         </td>
@@ -2079,17 +2081,17 @@ const btnEtiqueta = (sustancia.palabra === "Ninguno" && (!sustancia.pictograms |
     class="icon-btn sds view-sds"
     title="Ver hoja de seguridad"
   >
-    <span class="material-icons" style="color:black;">picture_as_pdf</span>
+    <span class="material-icons" style="color: var(--huf);">picture_as_pdf</span>
   </a>
 </td>
 
 
-<td style="font-size:11px; color:#6b7280;">
+<td style="font-size:11px; color:black;">
   ${formatearFecha(sustancia.pdfFecha)}
 </td>
 
 
-<td style="font-size:11px; color:#2563eb;">
+<td style="font-size:11px; color:var(--huf2);">
   ${formatearFecha(sustancia.fechaPublicacion)}
 </td>
 
@@ -2101,12 +2103,12 @@ const btnEtiqueta = (sustancia.palabra === "Ninguno" && (!sustancia.pictograms |
 <td class="admin-only visible" style="white-space: nowrap;">
     <button class="icon-btn edit" title="Editar"
         onclick="cargarDatosEdicion('${sustancia.firebaseKey}')">
-        <span class="material-icons">edit</span>
+        <span class="material-icons" style="color:var(--primary-color);">edit</span>
     </button>
 
     <button class="icon-btn delete" title="Eliminar"
         onclick="eliminarSustancia('${sustancia.firebaseKey}', '${sustancia.nombre}', '${sustancia.cas}')">
-        <span class="material-icons">delete</span>
+        <span class="material-icons" style="color:var(--primary-color);">delete</span>
     </button>
 </td>
 
