@@ -19,11 +19,9 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-``
 
 
-    
-    <style>
+<style>
 
 .material-icons {
   font-family: 'Material Icons';
@@ -165,21 +163,18 @@
             margin-bottom: 15px;
         }
 
-        .field {
-            display: flex;
-            flex-direction: column;
-        }
+
 
         .field label {
-            font-weight: 600;
-            margin-bottom: 5px;
-            font-size: 14px;
+            font-weight: 650;
+            margin-bottom: 10px;
+            font-size: 16px;
             text-align: left;
         }
 
         input[type="text"], select, input[type="file"], textarea {
             padding: 8px;
-            border: 1px solid var(--border-color);
+            border: 2px solid var(--border-color);
             border-radius: 4px;
             font-size: 14px;
             font-family: inherit;
@@ -187,7 +182,7 @@
 
         textarea {
             resize: vertical;
-            height: 100px;
+            height: 60px;
         }
 
         .pdf-status {
@@ -202,7 +197,7 @@
             padding: 12px;
             border-radius: 6px;
             margin-bottom: 15px;
-             border: 1px solid var(--border-color);
+             border: 2px solid var(--border-color);
         }
 
         .checkbox-group p {
@@ -268,7 +263,7 @@
             background: #fff;
             padding: 6px 10px;
             border-radius: 4px;
-            border: 1px solid var(--border-color);
+            border: 2px solid var(--border-color);
         }
 
         .checkbox-item-area input {
@@ -317,44 +312,21 @@ flex: 0 0 calc(25% - 7.5px);
         }
 
         
-        .table-container {
-            overflow-x: auto;
-            margin-top: 10px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-        }
+ 
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-            text-align: center;
-        }
-
-        th, td {
-            border: 1px solid var(--border-color);
-            padding: 8px;
-            vertical-align: middle;
-        }
-
-        th {
-            background-color: var(--primary-color);
-            color: white;
-            font-weight: 600;
-        }
-
-        .th-gha { background-color: #57606f; }
-        .th-sitio { background-color: #4b6584; }
-        .th-auditoria { background-color: #2c3e50; }
-
-        tr:nth-child(even) { background-color: #f9f9f9; }
-
-        .mark-x {
-            color: #a11818;
-            font-weight: bold;
-            font-size: 34px;
-        }
-        
+.mark-x {
+    display: inline-block;
+    padding: 5px 5px;
+    background: #264496;
+    color: white;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: italic;
+}
+        .mark-x:hover {
+    transform: scale(1.3);
+    transition: 0.2s;
+}
         .no-Peligro-text {
             color: #7f8c8d;
             font-style: italic;
@@ -662,21 +634,11 @@ flex: 0 0 calc(25% - 7.5px);
         }
 
         .user-info-bar span {
-            font-weight: 600;
+            font-weight: 900;
         }
 
-        .user-info-bar .user-role {
-            background: rgba(255, 255, 255, 0.3);
-            padding: 4px 12px;
-            border-radius: 4px;
-            font-size: 12px;
-        }
-        .user-info-bar header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-}
+
+
 .btn-out {
     padding: 10px 18px;        
     min-width: 90px;           
@@ -689,23 +651,6 @@ flex: 0 0 calc(25% - 7.5px);
     font-weight: bold;
     white-space: nowrap;       
 }
-
-
-        .logout-btn {
-            background: rgba(255, 255, 255, 0.3);
-            color: white;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 13px;
-            transition: background 0.2s;
-        }
-
-        .logout-btn:hover {
-            background: rgba(255, 255, 255, 0.5);
-        }
 
         .admin-only, .reader-only {
             display: none;
@@ -795,15 +740,6 @@ flex: 0 0 calc(25% - 7.5px);
 .card-kpi.green { background: #10b981; }  
 .card-kpi.orange { background: #f59e0b; } 
 .card-kpi.red { background: #dc2626; }    
-.btn-send {
-    margin-top: 8px;
-    padding: 4px 8px;
-    font-size: 11px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    background-color: var(--accent-color);
-}
 
 .tabla-dashboard {
     width: 100%;
@@ -818,7 +754,7 @@ flex: 0 0 calc(25% - 7.5px);
     text-align: center;
 }
         .btn-send {
-            width: 100%; padding: 14px; background-color: gray; color: white; 
+            width: 100%; padding: 14px; background-color: rgb(73, 69, 69); color: white; 
             border: none; border-radius: 8px; font-size: 1rem; font-weight: bold; 
             cursor: pointer; text-transform: uppercase; transition: background-color 0.2s; margin-top: 5px;
             
@@ -828,16 +764,9 @@ flex: 0 0 calc(25% - 7.5px);
             display: none; color: var(--error-red); font-size: 0.85rem; 
             margin-bottom: 15px; text-align: center; font-weight: bold;
         }
-        .btn-out {
-            width: 20%; padding: 14px; background-color: gray; color: white; 
-            border: none; border-radius: 8px; font-size: 1rem; font-weight: bold; 
-            cursor: pointer; text-transform: uppercase; transition: background-color 0.2s; margin-top: 5px;
-        }
+
         .btn-out:hover { background-color: rgb(170, 26, 26); }
-        #loginError {
-            display: none; color: var(--error-red); font-size: 0.85rem; 
-            margin-bottom: 15px; text-align: center; font-weight: bold;
-        }
+
         .campo-manual {
     background-color: #ffffff; 
 }
@@ -869,8 +798,45 @@ flex: 0 0 calc(25% - 7.5px);
 .field {
   display: flex;
   flex-direction: column;
-  margin-bottom: 15px;
+  margin-bottom: 8px;
+  gap: 2px;
+
+
+        
+            background: #ffffff;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+             border: 2px solid var(--border-color);
+  
 }
+
+.field label {
+  font-size: 13px;
+  font-weight: 900;
+  color: #374151;
+}
+
+.field input,
+.field select,
+.field textarea {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  background-color: #f9fafb;
+  transition: all 0.2s ease;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
 
 .campo-fecha {
   padding: 10px;
@@ -887,6 +853,123 @@ flex: 0 0 calc(25% - 7.5px);
   outline: none;
   background-color: #fff;
   box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+.filtros-bar input,
+.filtros-bar select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  font-size: 13px;
+  background-color: #f9fafb;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.filtros-bar input:focus,
+.filtros-bar select:focus {
+  outline: none;
+  border-color: #2563eb;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+.filtros-bar input:hover,
+.filtros-bar select:hover {
+  border-color: #9ca3af;
+}
+        .user-info-bar .user-role {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 1px;
+        }
+        .user-info-bar header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+.filtros-bar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #ffffff;
+
+  padding: 12px;
+  border-bottom: 2px solid #e5e7eb;
+
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.table-container {
+    width: 100%;
+    max-height: 620px; /* altura con scroll vertical */
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+/* Tabla */
+#excelTable {
+    width: 100%;
+    min-width: 1200px;
+    border-collapse: collapse;
+}
+
+/* Celdas */
+th, td {
+    white-space: nowrap;
+    text-align: center;
+    padding: 5px;
+    font-size: 12px;
+  border: 1px solid var(--border-color);
+}
+
+/* Headers fijos */
+thead th {
+    position: sticky;
+    background: #635f5f;
+}
+
+/* Primera fila */
+thead tr:first-child th {
+    top: 0;
+    z-index: 3;
+    
+}
+
+/* Segunda fila */
+thead tr:nth-child(2) th {
+    top: 25.9px; /* ajusta si cambia la altura */
+    z-index: 5;
+}
+
+/* Opcional: mejora visual */
+thead th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+}
+
+#excelTable {
+    border-collapse: separate;   /* 👈 CAMBIO CLAVE */
+    border-spacing: 0;
+}
+
+.vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    direction: rtl; /* 👈 esto reemplaza el rotate */
+}
+#excelTable td:nth-child(2),
+#excelTable th:nth-child(2) {
+    white-space: normal;     /* ✅ permite salto */
+    word-break: break-word;  /* ✅ corta palabras largas */
+}
+#excelTable td:nth-child(4),
+#excelTable th:nth-child(4) {
+    white-space: normal;     /* ✅ permite salto */
+    word-break: break-word;  /* ✅ corta palabras largas */
 }
 
     </style>
@@ -905,14 +988,27 @@ flex: 0 0 calc(25% - 7.5px);
         <div id="loginError" class="login-error"></div>
         
         <form id="loginForm" onsubmit="handleLogin(event)">
-            <div class="login-input-group">
-          <label for="loginUser" style="color:black;">USUARIO:</label>
-                <input type="text" id="loginUser" required placeholder="usuario..." autocomplete="username">
-            </div>
-            <div class="login-input-group">
-                <label for="loginPass" style="color:black;">CONTRASEÑA:</label>
-                <input type="password" id="loginPass" required placeholder="..." autocomplete="current-password">
-            </div>
+<div class="login-input-group">
+  <label for="loginUser">USUARIO:</label>
+  <input 
+    type="text" 
+    id="loginUser" 
+    name="username"
+    autocomplete="username"
+    required
+  >
+</div>
+
+<div class="login-input-group">
+  <label for="loginPass">CONTRASEÑA:</label>
+  <input 
+    type="password" 
+    id="loginPass" 
+    name="password"
+    autocomplete="current-password"
+    required
+  >
+</div>
             <button type="submit" class="btn-send">ENTRAR</button>
         </form>
     </div>
@@ -956,6 +1052,9 @@ flex: 0 0 calc(25% - 7.5px);
         </button>
 
                  
+                <!-- <button id="bulkTabBtn" class="tab-btn admin-only" onclick="switchWindow('bulk-window', this)">
+            <span class="material-icons">download</span> IMPORTAR ( OMI)
+        </button>  -->
           
 <button id="dashboardTabBtn" class="tab-btn" onclick="switchWindow('dashboard-window', this)">
     <span class="material-icons">timeline</span> DASHBOARD
@@ -1140,110 +1239,115 @@ flex: 0 0 calc(25% - 7.5px);
         </form>
     </div>
 
-    <div id="visualizacion-window" class="window-content">
+<div id="visualizacion-window" class="window-content">
         <h3>MATRIX DE SUSTANCIAS</h3>
-        <div style="margin-bottom:15px; display:flex; gap:10px; flex-wrap:nowrap; overflow-x:auto; align-items:center;">
+<div class="filtros-bar">
 
-  <input type="text" id="filterNombre" placeholder="� Nombre..." 
-    style="padding:4px; width:220px; flex-shrink:0;">
+  <span class="material-icons icon">filter_list</span><input type="text" id="filterNombre" placeholder="Nombre..." style="width:220px;">
 
-  <select id="filterPicto" style="width: 480px; flex-shrink:0;">
-  <option value="">⚠️ Todos...</option>
-  <option value="Flamable">Flamable</option>
-  <option value="Corrosivo">Corrosivo</option>
-  <option value="Oxidante">Oxidante</option>
-  <option value="Explosivo">Explosivo</option>
-  <option value="Irritante">Irritante</option>
-  <option value="Peligro Salud">Peligro Salud</option>
-  <option value="Gas">Gas</option>
-  <option value="Toxico">Toxico</option>
-  <option value="Ambiente">Ambiente</option>
-  <option value="SIN_PICTO">No peligrosas</option>
-</select>
-
-  <input type="text" id="filterCAS" placeholder="🆔 CAS..." 
-    style="padding:6px; width:120px; flex-shrink:0;">
-
-<select id="filterArea" style="width: 630px; flex-shrink:0;">
-    <option value="">📍 Todas las áreas</option>
-<option value="Pm">Producción Mecánica</option>
-<option value="MaM">Mantenimiento</option>
-<option value="Pe">Producción Electrónica</option>
-<option value="Mol">Moldes</option>
-<option value="Iny">Inyección</option>
-<option value="Lab">Laboratorio</option>
-<option value="Of">Oficinas</option>
-<option value="MaE">Mant.Electrónica</option>
-<option value="Infr">Infraestructura</option>
-<option value="Smed">Servicio Médico</option>
-<option value="SMT">SMT</option>
-<option value="Ar">Almacén Recibo</option>
-<option value="Tc">Tool Crib</option>
-<option value="Mt">Metrología</option>
+  
+  <span class="material-icons icon">filter_list</span><select id="filterPicto" style="width:250px;">
+    <option value="">Pictogramas...</option>
+    <option value="Flamable">Flamable</option>
+    <option value="Corrosivo">Corrosivo</option>
+    <option value="Oxidante">Oxidante</option>
+    <option value="Explosivo">Explosivo</option>
+    <option value="Irritante">Irritante</option>
+    <option value="Peligro Salud">Peligro Salud</option>
+    <option value="Gas">Gas</option>
+    <option value="Toxico">Toxico</option>
+    <option value="Ambiente">Ambiente</option>
+    <option value="SIN_PICTO">No peligrosas</option>
   </select>
-<select id="filterAntiguedad" style="width:210px; flex-shrink:0;">
-  <option value="">📅 Fecha Publicada</option>
-   <option value="lt6m">Menos de 6 meses</option>
-  <option value="6m">Más de 6 meses</option>
-  <option value="1y">Más de 1 año</option>
-  <option value="2y">Más de 2 años</option>
-  <option value="3y">Más de 3 años</option>
-</select>
 
-  <button onclick="limpiarFiltros()"  class="btn-send"
-    style="width: 100px; flex-shrink:0;">
+  <span class="material-icons icon">filter_list</span><input type="text" id="filterCAS" placeholder="CAS..." style="width:140px;">
+
+  <span class="material-icons icon">filter_list</span><select id="filterArea" style="width:260px;">
+    <option value="">Áreas...</option>
+    <option value="Pm">Producción Mecánica</option>
+    <option value="MaM">Mantenimiento</option>
+    <option value="Pe">Producción Electrónica</option>
+    <option value="Mol">Moldes</option>
+    <option value="Iny">Inyección</option>
+    <option value="Lab">Laboratorio</option>
+    <option value="Of">Oficinas</option>
+    <option value="MaE">Mant.Electrónica</option>
+    <option value="Infr">Infraestructura</option>
+    <option value="Smed">Servicio Médico</option>
+    <option value="SMT">SMT</option>
+    <option value="Ar">Almacén Recibo</option>
+    <option value="Tc">Tool Crib</option>
+    <option value="Mt">Metrología</option>
+  </select>
+
+  <span class="material-icons icon">filter_list</span>
+  <select id="filterAntiguedad" style="width:200px;">
+    <option value="">Fecha Publicada</option>
+    <option value="lt6m">Menos de 6 meses</option>
+    <option value="6m">Más de 6 meses</option>
+    <option value="1y">Más de 1 año</option>
+    <option value="2y">Más de 2 años</option>
+    <option value="3y">Más de 3 años</option>
+  </select>
+
+  <button class="btn-out" onclick="limpiarFiltros()" class="btn-send">
     Limpiar
   </button>
+
 
 </div>
 <div id="tabla" class="tab-content active">
         <div class="table-container">
             <table id="excelTable">
+
+
                 <thead>
                     <tr>
                         <th rowspan="2">No.</th>
                         <th rowspan="2">Quimico/Sustancia</th>
-                        <th colspan="9" class="th-gha">Sistema Armonizado Global (GHS)</th>
+                        <th colspan="9">Sistema Armonizado Global (GHS)</th>
                         <th rowspan="2">Número CAS</th>
                         <th rowspan="2">Presentación</th>
-                        <th colspan="14" class="th-sitio">Área en uso</th>
-                        <th rowspan="2">Etiqueta</th>
+                        <th colspan="14">Área en uso</th>
+                        <th rowspan="2">Tag</th>
                         <th rowspan="2">HDS</th>
-<th rowspan="2">Actualizada</th>
-<th rowspan="2">Publicada</th>
+<th rowspan="2">Act.</th>
+<th rowspan="2">Pub.</th>
                         <th rowspan="2" class="admin-only">Acciones</th>
                     </tr>
                     <tr>
-                        <th><img src="1.png" class="table-picto-img" onerror="this.style.display='none'"></th>
-                        <th><img src="2.png" class="table-picto-img" onerror="this.style.display='none'"></th>
-                        <th><img src="3.png" class="table-picto-img" onerror="this.style.display='none'"></th>
-                        <th><img src="4.png" class="table-picto-img" onerror="this.style.display='none'"></th>
-                        <th><img src="5.png" class="table-picto-img" onerror="this.style.display='none'"></th>
-                        <th><img src="6.png" class="table-picto-img" onerror="this.style.display='none'"></th>
-                        <th><img src="7.png" class="table-picto-img" onerror="this.style.display='none'"></th>
-                        <th><img src="8.png" class="table-picto-img" onerror="this.style.display='none'"></th>
-                        <th><img src="9.png" class="table-picto-img" onerror="this.style.display='none'"></th>
-                      <th title="Producción Mecánica">Pm</th>
-<th title="Mantenimiento">MaM</th>
-<th title="Producción Electrónica">Pe</th>
-<th title="Moldes">Mol</th>
-<th title="Inyección">Iny</th>
-<th title="Laboratorio">Lab</th>
-<th title="Oficinas">Of</th>
-<th title="Mant.Electrónica">MaE</th>
-<th title="Infraestructura">Infr</th>
-<th title="Servicio Médico">Smed</th>
-<th title="SMT">SMT</th>
-<th title="Almacén Recibo">Ar</th>
-<th title="Tool Crib">Tc</th>
-<th title="Metrología">Mt</th>
+<th><img src="1.png" class="table-picto-img" onerror="this.style.display='none'"></th>
+<th><img src="2.png" class="table-picto-img" onerror="this.style.display='none'"></th>
+<th><img src="3.png" class="table-picto-img" onerror="this.style.display='none'"></th>
+<th><img src="4.png" class="table-picto-img" onerror="this.style.display='none'"></th>
+<th><img src="5.png" class="table-picto-img" onerror="this.style.display='none'"></th>
+<th><img src="6.png" class="table-picto-img" onerror="this.style.display='none'"></th>
+<th><img src="7.png" class="table-picto-img" onerror="this.style.display='none'"></th>
+<th><img src="8.png" class="table-picto-img" onerror="this.style.display='none'"></th>
+<th><img src="9.png" class="table-picto-img" onerror="this.style.display='none'"></th>
+<th class="vertical-text" title="Producción Mecánica">Prod.Mec</th>
+<th class="vertical-text" title="Mantenimiento">Mantto</th>
+<th class="vertical-text" title="Producción Electrónica">Prod.Elect</th>
+<th class="vertical-text" title="Moldes">Moldes</th>
+<th class="vertical-text" title="Inyección">Inyección</th>
+<th class="vertical-text" title="Laboratorio">Laboratorio</th>
+<th class="vertical-text" title="Oficinas">Oficinas</th>
+<th class="vertical-text" title="Mant.Electrónica">Mantto.Elect</th>
+<th class="vertical-text" title="Infraestructura">Infraestruct</th>
+<th class="vertical-text" title="Servicio Médico">Serv.Medi</th>
+<th class="vertical-text" title="SMT">SMT</th>
+<th class="vertical-text" title="Almacén Recibo">Almacen</th>
+<th class="vertical-text" title="Tool Crib">ToolCrib</th>
+<th class="vertical-text" title="Metrología">Metrología</th>
+``
                     </tr>
                 </thead>
                 <tbody id="tableBody">
                 </tbody>
             </table>
         </div>
-        </div>
+        
+    </div>
         
     </div>
 
@@ -1275,11 +1379,7 @@ flex: 0 0 calc(25% - 7.5px);
     <div id="bulk-window" class="window-content admin-only">
         <h3>SOLO PARA DESARROLLO OMI</h3>
         
-<div class="field" style="margin-top:10px;">
-  <label>SELECCIONAR FOLDER PARA PDF</label>
-  <input type="file" id="bulkPdfFolder" webkitdirectory multiple accept=".pdf">
-  
-</div>
+
 
        
         <div class="field">
@@ -1288,9 +1388,7 @@ flex: 0 0 calc(25% - 7.5px);
         </div>
 
         <div style="margin-top:12px;">
-              <button id="btnUploadPDFs" class="btn-send">
-    CARGAR PDF'S
-  </button>
+
             <button id="btnParseExcel" class="btn-send">CARGAR BASE DE DATOS</button>
         </div>
         <div style="margin-top:10px;">
@@ -1478,7 +1576,7 @@ storageBucket: "sustanciasquimicas-1c7cd.firebasestorage.app",
   messagingSenderId: "704617827394",
   appId: "1:704617827394:web:ef2defba68b814cdf9f1db"
 };
-``
+
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 const storage = firebase.storage();
@@ -1556,94 +1654,80 @@ const mapaPictos = {
     }
 
     
-    document.getElementById('hdsFile').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        const statusDiv = document.getElementById('pdfStatus');
-        
-        if (!file || file.type !== "application/pdf") return;
+document.getElementById('hdsFile').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    const statusDiv = document.getElementById('pdfStatus');
+    
+    if (!file || file.type !== "application/pdf") return;
 
-       
+    const fileReader = new FileReader();
 
-        const fileReader = new FileReader();
-        fileReader.onload = function() {
-            const typedarray = new Uint8Array(this.result);
+    fileReader.onload = function() {
+        const typedarray = new Uint8Array(this.result);
 
-            pdfjsLib.getDocument(typedarray).promise.then(function(pdf) {
-                let maxPages = pdf.numPages;
-                let countPromises = [];
+        pdfjsLib.getDocument(typedarray).promise.then(function(pdf) {
+            let maxPages = pdf.numPages;
+            let countPromises = [];
 
-                for (let i = 1; i <= maxPages; i++) {
-                    countPromises.push(
-                        pdf.getPage(i).then(function(page) {
-                            return page.getTextContent().then(function(textContent) {
-                                return textContent.items.map(item => item.str).join(' ');
-                            });
-                        })
-                    );
+            for (let i = 1; i <= maxPages; i++) {
+                countPromises.push(
+                    pdf.getPage(i).then(function(page) {
+                        return page.getTextContent().then(function(textContent) {
+                            return textContent.items.map(item => item.str).join(' ');
+                        });
+                    })
+                );
+            }
+
+            Promise.all(countPromises).then(function(pageTexts) {
+
+                let fullText = pageTexts.join(' \n ');
+
+                const masterRegex = /([HP]\d{3}(?:\s*\+\s*[HP]\d{3})*[A-Z]?)\s+([\s\S]+?)(?=(?:[HP]\d{3}|\bSECCIÓN\b|\bINDICACIONES\b|\bCONSEJOS\b|$))/gi;
+
+                let frasesH = [];
+                let frasesP = [];
+                let match;
+
+                while ((match = masterRegex.exec(fullText)) !== null) {
+
+                    let codigo = match[1].toUpperCase().replace(/\s+/g, ' ');
+                    let descripcion = match[2].trim();
+
+                    if (descripcion.length < 5 || descripcion.includes("Página:")) continue;
+
+                    descripcion = descripcion.replace(/\b(Prevención|Respuesta|Desecho|Almacenamiento|Eliminación):/gi, '');
+                    descripcion = descripcion.replace(/\s+/g, ' ').trim();
+
+                    if (!descripcion.endsWith('.')) descripcion += '.';
+
+                    const fraseFormateada = `${codigo} ${descripcion}`;
+
+                    if (codigo.startsWith('H')) {
+                        if (!frasesH.includes(fraseFormateada)) frasesH.push(fraseFormateada);
+                    } else if (codigo.startsWith('P')) {
+                        if (!frasesP.includes(fraseFormateada)) frasesP.push(fraseFormateada);
+                    }
                 }
 
-                Promise.all(countPromises).then(function(pageTexts) {
-                    let fullText = pageTexts.join(' \n ');
-                    const masterRegex = /([HP]\d{3}(?:\s*\+\s*[HP]\d{3})*[A-Z]?)\s+([\s\S]+?)(?=(?:[HP]\d{3}|\bSECCIÓN\b|\bINDICACIONES\b|\bCONSEJOS\b|$))/gi;
+                // ✅ llenar campos
+                document.getElementById('indicacionesPeligro').value = frasesH.join('\n');
+                document.getElementById('consejosPrudencia').value = frasesP.join('\n');
 
-                    let frasesH = [];
-                    let frasesP = [];
-                    let numerosCAS = [];
-                    let match;
+                if (frasesH.length > 0 || frasesP.length > 0) {
+                    statusDiv.style.color = "#10b981";
+                }
 
-                    const casRegex = /\b(\d{1,7}-\d{1,5}-\d{1})\b/g;
-                    let casMatch;
-                    while ((casMatch = casRegex.exec(fullText)) !== null) {
-                        const casNumber = casMatch[1];
-                        if (!numerosCAS.includes(casNumber)) {
-                            numerosCAS.push(casNumber);
-                        }
-                    }
-
-                    while ((match = masterRegex.exec(fullText)) !== null) {
-                        let codigo = match[1].toUpperCase().replace(/\s+/g, ' ');
-                        let descripcion = match[2].trim();
-
-                        if (descripcion.length < 5 || descripcion.includes("Página:")) continue;
-
-                        descripcion = descripcion.replace(/\b(Prevención|Respuesta|Desecho|Almacenamiento|Eliminación):/gi, '');
-                        descripcion = descripcion.replace(/\s+/g, ' ').trim();
-                        
-                        if (!descripcion.endsWith('.')) descripcion += '.';
-                        
-                        const fraseFormateada = `${codigo} ${descripcion}`;
-
-                        if (codigo.startsWith('H')) {
-                            if (!frasesH.includes(fraseFormateada)) frasesH.push(fraseFormateada);
-                        } else if (codigo.startsWith('P')) {
-                            if (!frasesP.includes(fraseFormateada)) frasesP.push(fraseFormateada);
-                        }
-                    }
-
-                    
-                    
-                    
-
-                    document.getElementById('indicacionesPeligro').value = frasesH.join('\n');
-                    document.getElementById('consejosPrudencia').value = frasesP.join('\n');
-
-                    if (frasesH.length > 0 || frasesP.length > 0) {
-                        statusDiv.style.color = "#10b981";
-                        
-                    } else {
-                       
-                    }
-
-                });
-            }).catch(function(err) {
-                statusDiv.innerText = "❌ Technical error processing PDF file.";
-                statusDiv.style.color = "#dc2626";
-                console.error(err);
             });
-        };
-        fileReader.readAsArrayBuffer(file);
-        
-    });
+        }).catch(function(err) {
+            statusDiv.innerText = "❌ Error procesando PDF.";
+            statusDiv.style.color = "#dc2626";
+            console.error(err);
+        });
+    };
+
+    fileReader.readAsArrayBuffer(file);
+});
 
     
     db.ref("sustancias").on("value", (snapshot) => {
@@ -1756,7 +1840,7 @@ const registroSustancia = {
 };
 
             if (fileInput.files.length > 0) {
-                registroSustancia.pdfBase64 = hdsUrl;
+               
             }
 
             if (editKey) {
@@ -1929,22 +2013,7 @@ if (pictoFiltro === "SIN_PICTO") {
         return nombreOK && casOK && areaOK && pictogramaOK && antiguedadOK;
     });
 
-    
-    function obtenerColorFecha(fechaStr) {
-        if (!fechaStr) return "#7f8c8d";
 
-        const partes = fechaStr.split('/');
-        if (partes.length !== 3) return "#7f8c8d";
-
-        const fecha = new Date(partes[2], partes[1] - 1, partes[0]);
-        const hoy = new Date();
-
-        const diffDias = (hoy - fecha) / (1000 * 60 * 60 * 24);
-
-        if (diffDias <= 30) return "#16a34a";   
-        if (diffDias <= 180) return "#f59e0b";  
-        return "#dc2626";                       
-    }
 
     
     filtradas.forEach((sustancia, index) => {
@@ -1967,7 +2036,7 @@ if (pictoFiltro === "SIN_PICTO") {
         } else {
             totalPictogramas.forEach(p => {
                 const tienePicto = (sustancia.pictograms && sustancia.pictograms.some(item => item.id === p.id))
-                    ? '<span class="mark-x">●</span>' : '';
+                    ? '<span class="mark-x">✔</span>' : '';
                 htmlContenido += `<td>${tienePicto}</td>`;
             });
         }
@@ -1981,7 +2050,7 @@ if (pictoFiltro === "SIN_PICTO") {
 
         totalAreas.forEach(a => {
             const tieneArea = (sustancia.areas && sustancia.areas.includes(a))
-                ? '<span class="mark-x">●</span>' : '';
+                ? '<span class="mark-x">✔</span>' : '';
             htmlContenido += `<td>${tieneArea}</td>`;
         });
 
@@ -2054,19 +2123,7 @@ const btnEtiqueta = (sustancia.palabra === "Ninguno" && (!sustancia.pictograms |
 }
     
 
-function obtenerEtiquetaFecha(fechaStr) {
-    if (!fechaStr) return "Sin fecha";
 
-    const partes = fechaStr.split('/');
-    const fecha = new Date(partes[2], partes[1] - 1, partes[0]);
-    const hoy = new Date();
-
-    const diffDias = (hoy - fecha) / (1000 * 60 * 60 * 24);
-
-    if (diffDias <= 30) return "Vigente";
-    if (diffDias <= 180) return "Revisar";
-    return "Obsoleto";
-}
 
 
     function cargarDatosEdicion(firebaseKey) {
@@ -2370,16 +2427,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
     
 
-    
-    function abrirPDF(base64Data) {
-        
-        const win = window.open("", "_blank");
-        win.document.write(`
-            <title>SDS Viewer</title>
-            <style>body { margin: 0; } iframe { width: 100vw; height: 100vh; border: none; }</style>
-            <iframe src="${base64Data}"></iframe>
-        `);
-    }
+
 
     
     document.addEventListener('click', function(e) {
@@ -2398,7 +2446,7 @@ if (hdsLink && hdsLink !== "#") {
   confirmButtonColor: '#6b7280'
 });
 }
-``
+
     });
 
     
@@ -2601,7 +2649,7 @@ parsed.push({
         });
     }
 
-const pdfMap = getPdfMapByPrefix();
+
 async function processBulkImport(rows) {
 
   const container = document.getElementById('bulkPreviewContainer');
@@ -2611,7 +2659,7 @@ async function processBulkImport(rows) {
   const createdKeys = [];
 
   
-  const pdfMap = getPdfMapByPrefix();
+
 
   for (let g = 0; g < groups.length; g++) {
 
@@ -2642,7 +2690,7 @@ if (pdfFile) {
       reader.readAsDataURL(pdfFile);
     });
 
-    hdsUrl = base64Data;
+
 
   } catch (err) {
     console.error('Error reading PDF:', err);
@@ -2723,136 +2771,11 @@ if (pdfFile) {
   }
 }
 
-function getPdfMapFromFolder() {
-  const files = document.getElementById('bulkPdfFolder').files;
-  const map = {};
 
-  Array.from(files).forEach(file => {
-    const name = file.name.toLowerCase();
 
-    
-    const match = name.match(/(\d+)/);
 
-    if (match) {
-      const number = parseInt(match[1]);
-      map[number] = file;
-    }
-  });
 
-  return map;
-}
 
-function getPdfMapByPrefix() {
-
-  const files = Array.from(document.getElementById('bulkPdfFolder').files);
-  const map = {};
-
-  files.forEach(file => {
-
-    const name = file.name.toLowerCase();
-
-    
-    const match = name.match(/^(\d+)\./);
-
-    if (match) {
-      const index = parseInt(match[1]);
-      map[index] = file;
-    }
-
-  });
-
-  console.log("Mapa de PDFs:", map);
-
-  return map;
-}
-document.getElementById('btnUploadPDFs').addEventListener('click', async function () {
-
-    const files = Array.from(document.getElementById('bulkPdfFolder').files);
-
-    if (!files.length) {
-        Swal.fire({
-            icon: 'warning',
-            title: 'No PDFs selected',
-            text: 'Selecciona una carpeta con PDFs'
-        });
-        return;
-    }
-
-    
-    const pdfMap = {};
-    files.forEach(file => {
-        const match = file.name.match(/^(\d+)\./);
-        if (match) {
-            const index = parseInt(match[1]);
-            pdfMap[index] = file;
-        }
-    });
-
-    
-    const snapshot = await db.ref("sustancias").once("value");
-
-    if (!snapshot.exists()) {
-        Swal.fire("No hay sustancias en la base");
-        return;
-    }
-
-    let sustancias = [];
-
-    snapshot.forEach(child => {
-        sustancias.push({
-            key: child.key,
-            ...child.val()
-        });
-    });
-
-    
-    sustancias.sort((a, b) => a.id - b.id);
-
-    let actualizados = 0;
-
-    for (let i = 0; i < sustancias.length; i++) {
-
-        const file = pdfMap[i + 1]; 
-        if (!file) continue;
-
-        try {
-            
-            const base64Data = await new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = e => resolve(e.target.result);
-                reader.onerror = err => reject(err);
-                reader.readAsDataURL(file);
-            });
-
-            
-            const ahora = new Date();
-            const fechaPDF = ahora.toLocaleDateString('es-MX', {
-                day: '2-digit',
-                month: '2-digit',
-                year: 'numeric'
-            });
-
-            
-            await db.ref("sustancias/" + sustancias[i].key).update({
-                pdfBase64: base64Data,
-                hdsUrl: base64Data,
-                pdfFecha: fechaPDF
-            });
-
-            actualizados++;
-
-        } catch (err) {
-            console.error("Error con archivo:", file.name, err);
-        }
-    }
-
-    Swal.fire({
-        icon: 'success',
-        title: 'Carga masiva completa',
-        text: `${actualizados} SDS actualizados correctamente`
-    });
-
-});
 
 
 
@@ -3054,21 +2977,7 @@ document.getElementById('kpiLt6m').innerText = lt6;
 
 
 }
-function abrirVentana(id) {
 
-    
-    document.querySelectorAll('.window-content').forEach(w => {
-        w.style.display = "none";
-    });
-
-    
-    document.getElementById(id).style.display = "block";
-
-    
-    if (id === "dashboard-window") {
-        actualizarDashboard();
-    }
-}
 function filtrarDashboard(tipo) {
 
     const lista = listaSustancias.map(s => {
@@ -3123,34 +3032,7 @@ function pintarTablaDashboard(lista) {
         tbody.appendChild(tr);
     });
 }
-async function detectarCASdesdeInput() {
 
-    const input = document.getElementById("hdsFile");
-    const resultadoDiv = document.getElementById("resultadoCAS");
-
-    if (!input.files.length) {
-        resultadoDiv.innerHTML = "⚠️ Selecciona un PDF primero";
-        return;
-    }
-
-    const file = input.files[0];
-
-    const listaCAS = await extraerCASdesdePDF(file);
-
-    if (listaCAS && listaCAS.length > 0) {
-
-    const casUnicos = [...new Set(listaCAS)];
-
-    const campoCAS = document.getElementById("cas");
-
-if (campoCAS) {
-    campoCAS.value = casUnicos.join(" | ");
-}
-
-
-}
-``
-}
 async function extraerCASdesdePDF(file) {
 
     const reader = new FileReader();
@@ -3250,7 +3132,7 @@ document.addEventListener("keydown", function (e) {
     }
 
   }
-  document.addEventListener("keydown", function (e) {
+
 
   
   if (e.ctrlKey) {
@@ -3287,7 +3169,7 @@ document.addEventListener("keydown", function (e) {
 
 });
 
-});
+
 
 function calcularAntiguedad(fechaStr) {
   if (!fechaStr) return 0;
