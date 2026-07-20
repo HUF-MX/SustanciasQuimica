@@ -2629,18 +2629,15 @@ if (pictoFiltro === "SIN_PICTO") {
             htmlContenido += `<td>${tieneArea}</td>`;
         });
 
-const btnEtiqueta = (sustancia.palabra === "Ninguno" && (!sustancia.pictograms || sustancia.pictograms.length === 0))
-    ? `<td><span style="color:var(--huf2);">N/A</span></td>`
-    : `
-        <td>
-            <button class="icon-btn label" title="Ver etiqueta"
-                onclick="generarEtiqueta('${sustancia.firebaseKey}')"
-                style="flex-direction: column;">
-             <span class="material-icons" style="color: var(--huf2);">local_offer</span>
-              
-            </button>
-        </td>
-      `;
+const btnEtiqueta = `
+    <td>
+        <button class="icon-btn label" title="Ver etiqueta"
+            onclick="generarEtiqueta('${sustancia.firebaseKey}')"
+            style="flex-direction: column;">
+            <span class="material-icons" style="color: var(--huf2);">local_offer</span>
+        </button>
+    </td>
+`;
 
         
         const colorFecha = obtenerColorFecha(sustancia.pdfFecha);
@@ -2905,9 +2902,11 @@ if (areaFiltro) {
         const sustancia = listaSustancias.find(s => s.firebaseKey === firebaseKey);
         if(!sustancia) return;
 
+        const esSinAdvertencia = sustancia.palabra === "Ninguno" && (!sustancia.pictograms || sustancia.pictograms.length === 0);
+
         document.getElementById('lblNombre').innerText = sustancia.nombre;
         document.getElementById('lblCasInfo').innerText = "CAS: " + sustancia.cas;
-        document.getElementById('lblPalabra').innerText = sustancia.palabra === "Ninguno" ? "" : sustancia.palabra;
+        document.getElementById('lblPalabra').innerText = esSinAdvertencia ? "Sin palabra de advertencia" : sustancia.palabra;
         document.getElementById('lblIndicaciones').innerText = sustancia.indicaciones || "No specific hazard statements.";
         document.getElementById('lblConsejos').innerText = sustancia.consejos || "No specific precautionary measures.";
         document.getElementById('lblDireccion').innerText =
