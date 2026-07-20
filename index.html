@@ -80,6 +80,7 @@
             --audit-color: #6b7280;
             --huf: #aa2727;
             --huf2: #1d64cec4;
+            --huf-red: #aa1c25; 
            
 
         }
@@ -514,7 +515,7 @@ flex: 0 0 calc(25% - 7.5px);
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            background: WHITE;
             justify-content: center;
             align-items: center;
             z-index: 1000;
@@ -756,13 +757,27 @@ flex: 0 0 calc(25% - 7.5px);
     padding: 6px;
     text-align: center;
 }
-        .btn-send {
-            width: 100%; padding: 14px; background-color: rgb(73, 69, 69); color: white; 
-            border: none; border-radius: 8px; font-size: 1rem; font-weight: bold; 
-            cursor: pointer; text-transform: uppercase; transition: background-color 0.2s; margin-top: 5px;
-            
-        }
-        .btn-send:hover { background-color: rgb(170, 26, 26); }
+.btn-send {
+        width: 100%;
+        padding: 14px;
+        background-color: rgba(165, 23, 13, 0.678);
+        color: rgb(255, 255, 255);
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s, transform 0.1s;
+        margin-top: 10px;
+    }
+
+    .btn-send:hover {
+        background-color: var(--huf-red);
+    }
+
+    .btn-send:active {
+        transform: scale(0.98);
+    }
         #loginError {
             display: none; color: var(--error-red); font-size: 0.85rem; 
             margin-bottom: 15px; text-align: center; font-weight: bold;
@@ -1028,45 +1043,81 @@ thead th {
     width: 100%;
     box-sizing: border-box; /* ✅ CLAVE */
 }
+
+.moving-title {
+    text-align: center;
+    display: inline-block;
+    animation: bounceIn 1s ease, glow 2s infinite alternate;
+    color: #00d2ff; /* O el color que prefieras */
+    text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+}
+
+/* Animación de entrada */
+@keyframes bounceIn {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.05); opacity: 1; }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}
+
+/* Animación de resplandor constante */
+@keyframes glow {
+    from { text-shadow: 0 0 5px #bb2217; }
+    to { text-shadow: 0 0 20px #fafeff, 0 0 30px #f7f7f7; }
+}
     </style>
 
 </head>
 <body>
 
     
-<div id="loginOverlay" class="login-overlay">
-    <div class="login-card">
-               <div class="logo-container">
-            <img src="logo.png" alt="HUF Logo" onerror="this.style.display='none';"></div>
-        <h1 style="color:black;">CONTROL DE SUSTANCIAS</h1>
+<div id="loginOverlay" class="login-overlay view-layer active-view">
+    <div class="login-card login-box">
+    <div class="logo-container">
+        <img src="logo.png" alt="HUF Logo" onerror="this.style.display='none';">
+        <p class="logo-subtitle">Developed By Omar Amador</p>
+    </div>
+        
+        <h1 style="color:black;" class="moving-title">CONTROL DE SUSTANCIAS</h1>
         <p>HOJAS Y ETIQUETAS DE SEGURIDAD</p>
         
         <div id="loginError" class="login-error"></div>
         
         <form id="loginForm" onsubmit="handleLogin(event)">
-<div class="login-input-group">
-  <label for="loginUser">USUARIO:</label>
-  <input 
-    type="text" 
-    id="loginUser" 
-    name="username"
-    autocomplete="username"
-    required
-  >
-</div>
+            <div class="login-input-group">
+                <input 
+                    type="text" 
+                    id="loginUser" 
+                    name="username"
+                    class="input-login"
+                    placeholder="Usuario"
+                    autocomplete="username"
+                    oninput="limpiarError()"
+                    required
+                >
+            </div>
 
-<div class="login-input-group">
-  <label for="loginPass">CONTRASEÑA:</label>
-  <input 
-    type="password" 
-    id="loginPass" 
-    name="password"
-    autocomplete="current-password"
-    required
-  >
-</div>
+            <div class="login-input-group">
+                <input 
+                    type="password" 
+                    id="loginPass" 
+                    name="password"
+                    class="input-login"
+                    placeholder="Contraseña"
+                    autocomplete="current-password"
+                    oninput="limpiarError()"
+                    required
+                >
+            </div>
+
             <button type="submit" class="btn-send">ENTRAR</button>
-            <button type="button" class="btn-send" style="background-color:#6b7280; margin-top:10px;" onclick="openRegisterUserModal()">REGISTRAR USUARIO</button>
+            
+            <div class="register-hint" style="margin-top: 20px; text-align: center; font-size: 0.9em; color: #555;">
+                <p>¿Aún no tienes una cuenta?</p>
+                <p>Haz clic abajo para registrarte en el sistema y obtener tus credenciales.</p>
+                
+                <button type="button" class="btn-send" ; margin-top:10px;" onclick="openRegisterUserModal()">REGISTRAR USUARIO</button>
+            </div>
         </form>
     </div>
 </div>
