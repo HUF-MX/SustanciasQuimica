@@ -588,6 +588,164 @@ flex: 0 0 calc(25% - 7.5px);
             display: none;
         }
 
+        .register-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.65);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            z-index: 1100;
+        }
+
+        .register-modal-overlay.active {
+            display: flex;
+        }
+
+        .register-modal {
+            width: min(520px, 100%);
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 26px 26px 22px;
+            box-shadow: 0 26px 60px rgba(15, 23, 42, 0.24);
+            border: 1px solid rgba(170, 39, 39, 0.15);
+            max-height: calc(100vh - 64px);
+            overflow: auto;
+        }
+
+        .register-modal h3 {
+            margin: 0 0 8px;
+            color: var(--primary-color);
+            font-size: 1.35rem;
+            letter-spacing: 0.02em;
+        }
+
+        .register-modal p {
+            margin: 0;
+            color: #475569;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .register-modal input,
+        .register-modal select {
+            border-color: #cbd5e1;
+            background: #f8fafc;
+        }
+
+        .register-modal .close-modal {
+            color: #374151;
+            font-weight: 700;
+        }
+
+        .register-modal .modal-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .register-modal label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .register-modal input,
+        .register-modal select {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid #d1d5db;
+            padding: 12px 14px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: #111827;
+            background: #f8fafc;
+            box-sizing: border-box;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .register-modal input:focus,
+        .register-modal select:focus {
+            outline: none;
+            border-color: var(--huf);
+            box-shadow: 0 0 0 4px rgba(170, 39, 39, 0.12);
+        }
+
+        .register-modal .hint-box {
+            margin-top: 16px;
+            padding: 14px 16px;
+            background: rgba(170, 39, 39, 0.08);
+            border-left: 4px solid var(--huf);
+            border-radius: 12px;
+            color: var(--huf);
+            font-size: 0.92rem;
+            line-height: 1.5;
+        }
+
+        .register-modal .modal-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 20px;
+        }
+
+        .register-modal .modal-row > div {
+            width: 100%;
+        }
+
+        .register-modal .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .register-modal .modal-actions button {
+            width: auto;
+            min-width: 130px;
+        }
+
+        .register-modal .btn-secondary {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+            box-shadow: none;
+        }
+
+        .register-modal .modal-error {
+            display: none;
+            margin-top: 10px;
+            color: #dc2626;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 580px) {
+            .register-modal .modal-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .register-modal .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 16px;
+        }
+
+        .register-modal button.close-modal {
+            background: transparent;
+            border: none;
+            color: #6b7280;
+            cursor: pointer;
+            font-size: 0.95rem;
+            padding: 8px 10px;
+        }
+
         .login-card {
             background: white;
             padding: 40px;
@@ -1189,7 +1347,7 @@ thead th {
         
         <div id="loginError" class="login-error"></div>
         
-        <form id="loginForm" onsubmit="handleLogin(event)">
+        <form id="loginForm">
             <div class="login-input-group">
                 <input 
                     type="text" 
@@ -1198,7 +1356,6 @@ thead th {
                     class="input-login"
                     placeholder="Usuario"
                     autocomplete="username"
-                    oninput="limpiarError()"
                     required
                 >
             </div>
@@ -1211,7 +1368,6 @@ thead th {
                     class="input-login"
                     placeholder="Contraseña"
                     autocomplete="current-password"
-                    oninput="limpiarError()"
                     required
                 >
             </div>
@@ -1222,9 +1378,57 @@ thead th {
                 <p>¿Aún no tienes una cuenta?</p>
                 <p>Haz clic abajo para registrarte en el sistema y obtener tus credenciales.</p>
                 
-                <button type="button" class="btn-send" ; margin-top:10px;" onclick="openRegisterUserModal()">REGISTRAR USUARIO</button>
+                <button type="button" id="registerUserBtn" data-action="openRegisterUserModal" class="btn-send" style="margin-top:10px;">REGISTRAR USUARIO</button>
             </div>
         </form>
+    </div>
+</div>
+
+<div id="registerUserModal" class="register-modal-overlay" aria-hidden="true">
+    <div class="register-modal" role="dialog" aria-modal="true" aria-labelledby="registerUserModalTitle">
+        <div class="register-modal-header modal-header">
+            <div>
+                <h3 id="registerUserModalTitle">Registrar usuario</h3>
+                <p>Solicita acceso al sistema. El moderador revisará tu petición.</p>
+            </div>
+            <button type="button" class="close-modal" data-action="closeRegisterUserModal">Cerrar</button>
+        </div>
+
+        <div class="modal-row">
+            <div>
+                <label for="newUserName">Nombre completo</label>
+                <input id="newUserName" placeholder="Nombre completo">
+            </div>
+            <div>
+                <label for="newUserLogin">Usuario</label>
+                <input id="newUserLogin" placeholder="Usuario">
+            </div>
+        </div>
+
+        <div class="modal-row">
+            <div>
+                <label for="newUserPass">Contraseña</label>
+                <input id="newUserPass" type="password" placeholder="Mínimo 4 caracteres">
+            </div>
+            <div>
+                <label for="newUserRole">Rol</label>
+                <select id="newUserRole">
+                    <option value="viewer">VIEWER</option>
+                    <option value="admin">ADMIN</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="hint-box">
+            <strong>Nota:</strong> El usuario quedará pendiente hasta que un moderador lo apruebe.
+        </div>
+
+        <div id="registerUserModalError" class="modal-error"></div>
+
+        <div class="modal-actions">
+            <button type="button" class="btn-secondary" data-action="closeRegisterUserModal">Cancelar</button>
+            <button type="button" class="btn-send" data-action="submitRegisterUser">Enviar solicitud</button>
+        </div>
     </div>
 </div>
 
@@ -1248,8 +1452,8 @@ thead th {
         
         <div style="display:flex; align-items:center; gap:10px;">
             <span class="user-badge-header" id="userDisplayBadge">User: Admin</span>
-            <button id="btnUserAdmin" class="btn-out" style="display:none; background-color:#c0392b;" onclick="openModeratorUserPanel()">Usuarios</button>
-            <button class="btn-out" onclick="handleLogout()">Salir</button>
+            <button id="btnUserAdmin" data-action="openModeratorUserPanel" class="btn-out" style="display:none; background-color:#c0392b;">Usuarios</button>
+            <button id="logoutBtn" data-action="handleLogout" class="btn-out">Salir</button>
         </div>
 
     </header>
@@ -1258,11 +1462,11 @@ thead th {
 <div class="container">
     
     <div class="launcher-tabs">
-        <button id="regTabBtn" class="tab-btn admin-only" onclick="switchWindow('registro-window', this)">
+        <button id="regTabBtn" class="tab-btn admin-only" data-action="switchWindow" data-tab="registro-window">
             <span class="material-icons">add</span> REGISTRO
         </button>
 
-        <button id="vizTabBtn" class="tab-btn" onclick="switchWindow('visualizacion-window', this)">
+        <button id="vizTabBtn" class="tab-btn" data-action="switchWindow" data-tab="visualizacion-window">
             <span class="material-icons">grid_view</span> MATRIX
         </button>
 
@@ -1272,27 +1476,21 @@ thead th {
         </button>   -->
         
           
-<button id="dashboardTabBtn" class="tab-btn" onclick="switchWindow('dashboard-window', this)">
+<button id="dashboardTabBtn" class="tab-btn" data-action="switchWindow" data-tab="dashboard-window">
     <span class="material-icons">timeline</span> DASHBOARD
 </button>
-        <button id="auditTabBtn" class="tab-btn" onclick="switchWindow('auditoria-window', this)">
+        <button id="auditTabBtn" class="tab-btn" data-action="switchWindow" data-tab="auditoria-window">
            <span class="material-icons">fact_check</span> HISTORIAL
         </button>
 
-        <button id="configTabBtn" class="tab-btn admin-only"
-     onclick="abrirConfigConPassword(this)">
-
-
-    
-    <span class="material-icons">settings</span> CONFIG
-</button>
-
+        <button id="configTabBtn" class="tab-btn admin-only" data-action="abrirConfigConPassword" data-tab="config-window">
+            <span class="material-icons">settings</span> CONFIGURACIÓN
+        </button>
     </div>
 
     <div id="registro-window" class="window-content admin-only">
-        <h2 id="formFormTitle">ALTA DE SUSTANCIAS QUIMICAS</h2>
+        <h2 id="formFormTitle" style="margin-bottom:20px;">ALTA DE SUSTANCIAS QUIMICAS</h2>
         <div id="successAlert" class="alert-success" style="display:none;">Sustancia registrada exitosamente!</div>
-        
         <form id="sustanciaForm">
             <input type="hidden" id="editFirebaseKey" value="">
             <input type="hidden" id="existingHdsUrl" value="">
@@ -1455,9 +1653,9 @@ thead th {
 <button
     type="button" 
     id="btnCancelEdit" 
+    data-action="cancelarEdicion"
     class="btn-send" 
-    style="display:none; margin: 10px auto;" 
-    onclick="cancelarEdicion()">
+    style="display:none; margin: 10px auto;">
     Cancelar
 </button>
         </form>
@@ -1514,7 +1712,7 @@ thead th {
     <option value="3y">Más de 3 años</option>
   </select>
 
-  <button class="btn-out" onclick="limpiarFiltros()" class="btn-send">
+  <button id="clearFiltersBtn" style="width:100px;" class="btn-out btn-send">
     Limpiar
   </button>
 
@@ -1671,25 +1869,25 @@ thead th {
    <div class="card-kpi blue">
     <h3 id="kpiTotal">0</h3>
     <p>Total Sustancias</p>
-    <button onclick="filtrarDashboard('total')" class="btn-send">Ver</button>
+    <button data-action="filtrarDashboard" data-key="total" class="btn-send">Ver</button>
 </div>
 
 <div class="card-kpi green">
     <h3 id="kpiBajo">0</h3>
     <p>Riesgo Bajo</p>
-    <button onclick="filtrarDashboard('bajo')" class="btn-send">Ver</button>
+    <button data-action="filtrarDashboard" data-key="bajo" class="btn-send">Ver</button>
 </div>
 
 <div class="card-kpi orange">
     <h3 id="kpiMedio">0</h3>
     <p>Riesgo Medio</p>
-    <button onclick="filtrarDashboard('medio')" class="btn-send">Ver</button>
+    <button data-action="filtrarDashboard" data-key="medio" class="btn-send">Ver</button>
 </div>
 
 <div class="card-kpi red">
     <h3 id="kpiAlto">0</h3>
     <p>Riesgo Alto</p>
-    <button onclick="filtrarDashboard('alto')" class="btn-send">Ver</button>
+    <button data-action="filtrarDashboard" data-key="alto" class="btn-send">Ver</button>
     
 
 </div>
@@ -1779,7 +1977,7 @@ thead th {
         </div>
         <div class="label-actions-bar">
             
-            <button class="btn-action" style="background:#6b7280; padding: 10px 20px;" onclick="cerrarEtiqueta()">Close</button>
+            <button id="closeLabelBtn" data-action="cerrarEtiqueta" class="btn-action" style="background:#6b7280; padding: 10px 20px;">Close</button>
         </div>
     </div>
 
@@ -1848,7 +2046,7 @@ thead th {
     </div>
 
     <div style="text-align:center; margin-top:25px;">
-        <button class="btn-send" onclick="guardarConfig()">
+        <button id="saveConfigBtn" data-action="guardarConfig" class="btn-send">
             💾 GUARDAR CONFIGURACIÓN
         </button>
     </div>
@@ -1859,6 +2057,7 @@ thead th {
 
 
 <script>
+(function() {
     
     pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
 
@@ -1879,8 +2078,53 @@ const storage = firebase.storage();
 const DB_USERS = "app_users";
 
     let listaSustancias = [];
-    let appUsersCache = [];
-    let userSystemBootPromise = null;
+    let grafica = null;
+
+    const {
+        bootUserSystem,
+        getUsers,
+        usernameExists
+    } = (() => {
+        let appUsersCache = [];
+        let userSystemBootPromise = null;
+
+        async function bootUserSystem() {
+            if (userSystemBootPromise) return userSystemBootPromise;
+            userSystemBootPromise = (async () => {
+                const usersRef = db.ref(DB_USERS);
+                const snap = await usersRef.once('value');
+                if (!snap.exists()) {
+                    await usersRef.set(await buildSeedUsers());
+                }
+                const fresh = await usersRef.once('value');
+                appUsersCache = userSnapshotToArray(fresh.val());
+                usersRef.on('value', rt => {
+                    appUsersCache = userSnapshotToArray(rt.val());
+                    syncModeratorButton();
+                });
+                return appUsersCache;
+            })().catch(err => {
+                console.error('bootUserSystem error', err);
+                return [];
+            });
+            return userSystemBootPromise;
+        }
+
+        async function getUsers(force = false) {
+            if (appUsersCache.length && !force) return appUsersCache;
+            const snap = await db.ref(DB_USERS).once('value');
+            appUsersCache = userSnapshotToArray(snap.val());
+            return appUsersCache;
+        }
+
+        async function usernameExists(username, excludeId = '') {
+            const users = await getUsers(true);
+            const key = String(username || '').trim().toLowerCase();
+            return users.some(u => String(u.user || '').trim().toLowerCase() === key && u.id !== excludeId);
+        }
+
+        return { bootUserSystem, getUsers, usernameExists };
+    })();
 
     function normalizeRole(role) {
         const value = String(role || '').trim().toLowerCase();
@@ -1911,53 +2155,29 @@ const DB_USERS = "app_users";
         return normalizeRole(role) === 'moderator';
     }
 
+    function isPasswordHash(value) {
+        return typeof value === 'string' && /^[0-9a-f]{64}$/i.test(value);
+    }
+
+    async function hashPassword(password) {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(String(password));
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+        return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
     function userSnapshotToArray(snapshotValue) {
         const raw = snapshotValue || {};
         return Object.keys(raw).map(key => ({ id: key, ...raw[key], rol: normalizeRole(raw[key]?.rol), estado: raw[key]?.estado || 'approved' }));
     }
 
-    function buildSeedUsers() {
+    async function buildSeedUsers() {
         const nowISO = new Date().toISOString();
         return {
-            seed_moderator: { nombre: 'Moderador General', user: 'moderador', pass: 'mod123', rol: 'moderator', estado: 'approved', creadoEn: nowISO, creadoPor: 'system' },
-            seed_admin: { nombre: 'Administrador Base', user: 'admin', pass: 'admin123', rol: 'admin', estado: 'approved', creadoEn: nowISO, creadoPor: 'system' },
-            seed_viewer: { nombre: 'Usuario Viewer', user: 'viewer', pass: 'viewer123', rol: 'viewer', estado: 'approved', creadoEn: nowISO, creadoPor: 'system' }
+            seed_moderator: { nombre: 'Moderador General', user: 'moderador', pass: await hashPassword('mod123'), rol: 'moderator', estado: 'approved', creadoEn: nowISO, creadoPor: 'system' },
+            seed_admin: { nombre: 'Administrador Base', user: 'admin', pass: await hashPassword('admin123'), rol: 'admin', estado: 'approved', creadoEn: nowISO, creadoPor: 'system' },
+            seed_viewer: { nombre: 'Usuario Viewer', user: 'viewer', pass: await hashPassword('viewer123'), rol: 'viewer', estado: 'approved', creadoEn: nowISO, creadoPor: 'system' }
         };
-    }
-
-    async function bootUserSystem() {
-        if (userSystemBootPromise) return userSystemBootPromise;
-        userSystemBootPromise = (async () => {
-            const usersRef = db.ref(DB_USERS);
-            const snap = await usersRef.once('value');
-            if (!snap.exists()) {
-                await usersRef.set(buildSeedUsers());
-            }
-            const fresh = await usersRef.once('value');
-            appUsersCache = userSnapshotToArray(fresh.val());
-            usersRef.on('value', rt => {
-                appUsersCache = userSnapshotToArray(rt.val());
-                syncModeratorButton();
-            });
-            return appUsersCache;
-        })().catch(err => {
-            console.error('bootUserSystem error', err);
-            return [];
-        });
-        return userSystemBootPromise;
-    }
-
-    async function getUsers(force = false) {
-        if (appUsersCache.length && !force) return appUsersCache;
-        const snap = await db.ref(DB_USERS).once('value');
-        appUsersCache = userSnapshotToArray(snap.val());
-        return appUsersCache;
-    }
-
-    async function usernameExists(username, excludeId = '') {
-        const users = await getUsers(true);
-        const key = String(username || '').trim().toLowerCase();
-        return users.some(u => String(u.user || '').trim().toLowerCase() === key && u.id !== excludeId);
     }
 
     function syncModeratorButton() {
@@ -1968,79 +2188,74 @@ const DB_USERS = "app_users";
     }
 
    async function openRegisterUserModal(prefillUser = '') {
-    await bootUserSystem();
+        await bootUserSystem();
+        const modal = document.getElementById('registerUserModal');
+        if (!modal) return;
+        document.getElementById('newUserName').value = '';
+        document.getElementById('newUserLogin').value = String(prefillUser || '').trim();
+        document.getElementById('newUserPass').value = '';
+        document.getElementById('newUserRole').value = 'viewer';
+        document.getElementById('registerUserModalError').textContent = '';
+        modal.classList.add('active');
+        modal.setAttribute('aria-hidden', 'false');
+        document.getElementById('newUserName').focus();
+    }
 
-    Swal.fire({
-        title: '<h3 style="margin:0; font-weight:600;">Registrar usuario</h3>',
-        html: `
-            <div style="text-align: left; padding: 10px 0;">
-                <label style="display:block; margin-bottom:5px; font-weight:500; font-size:14px;">Nombre completo</label>
-                <input id="newUserName" class="swal2-input" placeholder="..." style="margin:0 0 15px 0; width:100%; box-sizing:border-box;">
-                
-                <label style="display:block; margin-bottom:5px; font-weight:500; font-size:14px;">Usuario</label>
-                <input id="newUserLogin" class="swal2-input" placeholder="Usuario" value="${String(prefillUser || '').replace(/"/g, '&quot;')}" style="margin:0 0 15px 0; width:100%; box-sizing:border-box;">
-                
-                <label style="display:block; margin-bottom:5px; font-weight:500; font-size:14px;">Contraseña</label>
-                <input id="newUserPass" class="swal2-input" type="password" placeholder="Mínimo 4 caracteres" style="margin:0 0 15px 0; width:100%; box-sizing:border-box;">
-                
-                <label style="display:block; margin-bottom:5px; font-weight:500; font-size:14px;">Rol</label>
-                <select id="newUserRole" class="swal2-input" style="margin:0 0 15px 0; width:100%; box-sizing:border-box;">
-                    <option value="viewer">VIEWER</option>
-                    <option value="admin">ADMIN</option>
-                </select>
-                
-                <div style="font-size: 13px; color: #666; background: #f9f9f9; padding: 10px; border-radius: 4px; border-left: 4px solid var(--huf-red);">
-                    <strong>Nota:</strong> El usuario quedará pendiente hasta que un moderador lo apruebe.
-                </div>
-            </div>
-        `,
-        width: '500px',
-        confirmButtonText: 'Enviar solicitud',
-      
-        showCancelButton: true,
-        cancelButtonText: 'Cancelar',
-        focusConfirm: false,
-        preConfirm: async () => {
-            const nombre = document.getElementById('newUserName').value.trim();
-            const user = document.getElementById('newUserLogin').value.trim();
-            const pass = document.getElementById('newUserPass').value.trim();
-            const rol = normalizeRole(document.getElementById('newUserRole').value);
-
-            if (!nombre || !user || !pass) {
-                Swal.showValidationMessage('Completa todos los campos.');
-                return false;
-            }
-            if (pass.length < 4) {
-                Swal.showValidationMessage('La contraseña debe tener al menos 4 caracteres.');
-                return false;
-            }
-            if (await usernameExists(user)) {
-                Swal.showValidationMessage('Ese usuario ya existe.');
-                return false;
-            }
-            return { nombre, user, pass, rol };
+    function closeRegisterUserModal() {
+        const modal = document.getElementById('registerUserModal');
+        if (!modal) return;
+        modal.classList.remove('active');
+        modal.setAttribute('aria-hidden', 'true');
+        const errorEl = document.getElementById('registerUserModalError');
+        if (errorEl) {
+            errorEl.textContent = '';
+            errorEl.style.display = 'none';
         }
-    }).then(async result => {
-        if (!result.isConfirmed) return;
+    }
 
-        const { nombre, user, pass, rol } = result.value;
-        const id = `usr_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
+    async function submitRegisterUser() {
+        const errorEl = document.getElementById('registerUserModalError');
+        if (errorEl) {
+            errorEl.textContent = '';
+            errorEl.style.display = 'none';
+        }
+        const nombre = document.getElementById('newUserName').value.trim();
+        const user = document.getElementById('newUserLogin').value.trim();
+        const pass = document.getElementById('newUserPass').value.trim();
+        const rol = normalizeRole(document.getElementById('newUserRole').value);
+
+        if (!nombre || !user || !pass) {
+            errorEl.textContent = 'Completa todos los campos.';
+            if (errorEl) errorEl.style.display = 'block';
+            return;
+        }
+        if (pass.length < 4) {
+            errorEl.textContent = 'La contraseña debe tener al menos 4 caracteres.';
+            if (errorEl) errorEl.style.display = 'block';
+            return;
+        }
 
         try {
+            if (await usernameExists(user)) {
+                errorEl.textContent = 'Ese usuario ya existe.';
+                errorEl.style.display = 'block';
+                return;
+            }
+
+            const hashedPass = await hashPassword(pass);
+            const id = `usr_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
+
             await db.ref(`${DB_USERS}/${id}`).set({
                 nombre,
                 user,
-                pass,
+                pass: hashedPass,
                 rol,
                 estado: 'pending',
                 creadoEn: new Date().toISOString(),
                 creadoPor: 'self-request'
             });
 
-            // Opcional: si necesitas refrescar la lista tras registrar
-            if (typeof getUsersFromDB === 'function') {
-                await getUsersFromDB(true);
-            }
+            closeRegisterUserModal();
 
             await Swal.fire({
                 icon: 'success',
@@ -2049,14 +2264,11 @@ const DB_USERS = "app_users";
                 confirmButtonColor: 'var(--huf-red)'
             });
         } catch (error) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Hubo un problema al enviar tu solicitud. Inténtalo de nuevo más tarde.'
-            });
+            console.error('Register user error', error);
+            errorEl.textContent = 'Hubo un problema al enviar tu solicitud. Inténtalo de nuevo más tarde.';
+            errorEl.style.display = 'block';
         }
-    });
-}
+    }
 
     function buildModeratorUsersHtml(users) {
         const pending = users.filter(u => u.estado === 'pending');
@@ -2164,11 +2376,12 @@ const DB_USERS = "app_users";
             }
         });
         if (!result.isConfirmed || !result.value) return;
+        const hashedPass = await hashPassword(result.value.pass);
         const id = `usr_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
         await db.ref(`${DB_USERS}/${id}`).set({
             nombre: result.value.nombre,
             user: result.value.user,
-            pass: result.value.pass,
+            pass: hashedPass,
             rol: result.value.rol,
             estado: 'approved',
             creadoEn: new Date().toISOString(),
@@ -2738,7 +2951,8 @@ if (pictoFiltro === "SIN_PICTO") {
 const btnEtiqueta = `
     <td>
         <button class="icon-btn label" title="Ver etiqueta"
-            onclick="generarEtiqueta('${sustancia.firebaseKey}')"
+            data-action="generarEtiqueta"
+            data-key="${sustancia.firebaseKey}"
             style="flex-direction: column;">
             <span class="material-icons" style="color: var(--huf2);">local_offer</span>
         </button>
@@ -2778,12 +2992,14 @@ const btnEtiqueta = `
             htmlContenido += `
 <td class="admin-only visible" style="white-space: nowrap;">
     <button class="icon-btn edit" title="Editar"
-        onclick="cargarDatosEdicion('${sustancia.firebaseKey}')">
+        data-action="cargarDatosEdicion"
+        data-key="${sustancia.firebaseKey}">
         <span class="material-icons" style="color:var(--primary-color);">edit</span>
     </button>
 
     <button class="icon-btn delete" title="Eliminar"
-        onclick="eliminarSustancia('${sustancia.firebaseKey}', '${sustancia.nombre}', '${sustancia.cas}')">
+        data-action="eliminarSustancia"
+        data-key="${sustancia.firebaseKey}">
         <span class="material-icons" style="color:var(--primary-color);">delete</span>
     </button>
 </td>
@@ -2887,32 +3103,55 @@ if (areaFiltro) {
 
     function cargarDatosEdicion(firebaseKey) {
         const sustancia = listaSustancias.find(s => s.firebaseKey === firebaseKey);
-        if(!sustancia) return;
+        if (!sustancia) return;
 
-        
-        document.getElementById('formFormTitle').innerText = "Editar sustancia: " + sustancia.nombre;
-        document.getElementById('btnFormSubmit').innerText = "Actualizar sustancia";
-        document.getElementById('btnFormSubmit').style.backgroundColor = "var(--Advertencia-color)";
-        document.getElementById('btnCancelEdit').style.display = "block";
+        const formTitle = document.getElementById('formFormTitle');
+        if (formTitle) {
+            formTitle.innerText = "Editar sustancia: " + sustancia.nombre;
+        }
 
-        
-        document.getElementById('editFirebaseKey').value = firebaseKey;
-        document.getElementById('existingHdsUrl').value = sustancia.hdsUrl;
+        const submitBtn = document.getElementById('btnFormSubmit');
+        if (submitBtn) {
+            submitBtn.innerText = "Actualizar sustancia";
+            submitBtn.style.backgroundColor = "var(--Advertencia-color)";
+        }
 
-        
-        document.getElementById('nombre').value = sustancia.nombre;
-        document.getElementById('cas').value = sustancia.cas;
-        document.getElementById('presentacion').value = sustancia.presentacion;
-        document.getElementById('palabraAdvertencia').value = sustancia.palabra;
-        document.getElementById('indicacionesPeligro').value = sustancia.indicaciones || "";
-        document.getElementById('consejosPrudencia').value = sustancia.consejos || "";
-        document.getElementById('direccionSDS').value = sustancia.direccion || "";
+        const cancelBtn = document.getElementById('btnCancelEdit');
+        if (cancelBtn) {
+            cancelBtn.style.display = "block";
+        }
 
-        
-        document.getElementById('hdsFile').required = false;
-        document.getElementById('hdsLabel').innerText = "Update SDS (PDF) [Optional]:";
-      
-        document.getElementById('pdfStatus').style.color = "var(--accent-color)";
+        const editInput = document.getElementById('editFirebaseKey');
+        if (editInput) {
+            editInput.value = firebaseKey;
+        }
+
+        const existingHdsInput = document.getElementById('existingHdsUrl');
+        if (existingHdsInput) {
+            existingHdsInput.value = sustancia.hdsUrl;
+        }
+
+        const nombreInput = document.getElementById('nombre');
+        if (nombreInput) nombreInput.value = sustancia.nombre;
+        const casInput = document.getElementById('cas');
+        if (casInput) casInput.value = sustancia.cas;
+        const presentacionInput = document.getElementById('presentacion');
+        if (presentacionInput) presentacionInput.value = sustancia.presentacion;
+        const palabraSelect = document.getElementById('palabraAdvertencia');
+        if (palabraSelect) palabraSelect.value = sustancia.palabra;
+        const indicacionesText = document.getElementById('indicacionesPeligro');
+        if (indicacionesText) indicacionesText.value = sustancia.indicaciones || "";
+        const consejosText = document.getElementById('consejosPrudencia');
+        if (consejosText) consejosText.value = sustancia.consejos || "";
+        const direccionText = document.getElementById('direccionSDS');
+        if (direccionText) direccionText.value = sustancia.direccion || "";
+
+        const hdsFileInput = document.getElementById('hdsFile');
+        if (hdsFileInput) hdsFileInput.required = false;
+        const hdsLabel = document.getElementById('hdsLabel');
+        if (hdsLabel) hdsLabel.innerText = "Update SDS (PDF) [Optional]:";
+        const pdfStatus = document.getElementById('pdfStatus');
+        if (pdfStatus) pdfStatus.style.color = "var(--accent-color)";
 
         
         document.querySelectorAll('.picto-chk').forEach(cb => cb.checked = false);
@@ -3053,11 +3292,20 @@ if (areaFiltro) {
     try {
         await bootUserSystem();
         const usuariosRegistrados = await getUsers(true);
-        const usuarioValido = usuariosRegistrados.find(u =>
-            String(u.user || '').trim() === usuario && String(u.pass || '') === password
-        );
+        const hashedPassword = await hashPassword(password);
+        const usuarioValido = usuariosRegistrados.find(u => {
+            if (String(u.user || '').trim() !== usuario) return false;
+            if (isPasswordHash(u.pass)) {
+                return u.pass === hashedPassword;
+            }
+            return u.pass === password;
+        });
 
         if (usuarioValido) {
+            if (!isPasswordHash(usuarioValido.pass)) {
+                const newHash = await hashPassword(usuarioValido.pass);
+                await db.ref(`${DB_USERS}/${usuarioValido.id}`).update({ pass: newHash });
+            }
             if (usuarioValido.estado === 'pending') {
                 Swal.fire({ icon: 'info', title: 'Pendiente', text: 'Tu usuario sigue pendiente de aprobación por un moderador.', confirmButtonColor: '#c0392b' });
                 return;
@@ -3102,6 +3350,16 @@ if (areaFiltro) {
             }
       
        
+    function limpiarLoginError() {
+        const errorDiv = document.getElementById('loginError');
+        if (errorDiv) errorDiv.textContent = '';
+    }
+
+    function limpiarLoginError() {
+        const errorDiv = document.getElementById('loginError');
+        if (errorDiv) errorDiv.textContent = '';
+    }
+
     function obtenerUsuarioActual() {
         const sesion = localStorage.getItem('usuarioActual');
         if (sesion) {
@@ -3195,6 +3453,15 @@ if (areaFiltro) {
 window.addEventListener('DOMContentLoaded', async function() {
     await bootUserSystem();
     mostrarAplicacion();
+
+    const registerModalOverlay = document.getElementById('registerUserModal');
+    if (registerModalOverlay) {
+        registerModalOverlay.addEventListener('click', function(event) {
+            if (event.target === registerModalOverlay) {
+                closeRegisterUserModal();
+            }
+        });
+    }
 });
 
 
@@ -3204,26 +3471,111 @@ window.addEventListener('DOMContentLoaded', async function() {
 
     
     document.addEventListener('click', function(e) {
+        let actionButton = e.target;
+        while (actionButton && actionButton.nodeType !== 1) {
+            actionButton = actionButton.parentNode;
+        }
+        actionButton = actionButton ? actionButton.closest('[data-action]') : null;
+        if (actionButton) {
+            if (actionButton.id === 'registerUserModal' && e.target !== actionButton) {
+                return;
+            }
+            const action = actionButton.getAttribute('data-action');
+            const key = actionButton.getAttribute('data-key');
+            const targetWindow = actionButton.getAttribute('data-tab');
+            switch (action) {
+                case 'generarEtiqueta':
+                    if (key) {
+                        e.preventDefault();
+                        generarEtiqueta(key);
+                    }
+                    return;
+                case 'cargarDatosEdicion':
+                    if (key) {
+                        e.preventDefault();
+                        cargarDatosEdicion(key);
+                    }
+                    return;
+                case 'eliminarSustancia':
+                    if (key) {
+                        e.preventDefault();
+                        const sustancia = listaSustancias.find(s => s.firebaseKey === key);
+                        if (sustancia) {
+                            eliminarSustancia(key, sustancia.nombre, sustancia.cas);
+                        }
+                    }
+                    return;
+                case 'filtrarDashboard':
+                    e.preventDefault();
+                    filtrarDashboard(actionButton.getAttribute('data-key'));
+                    return;
+                case 'switchWindow':
+                    if (targetWindow) {
+                        e.preventDefault();
+                        switchWindow(targetWindow, actionButton);
+                    }
+                    return;
+                case 'openRegisterUserModal':
+                    e.preventDefault();
+                    openRegisterUserModal();
+                    return;
+                case 'closeRegisterUserModal':
+                    e.preventDefault();
+                    closeRegisterUserModal();
+                    return;
+                case 'submitRegisterUser':
+                    e.preventDefault();
+                    submitRegisterUser();
+                    return;
+                case 'openModeratorUserPanel':
+                    e.preventDefault();
+                    openModeratorUserPanel();
+                    return;
+                case 'handleLogout':
+                    e.preventDefault();
+                    handleLogout();
+                    return;
+                case 'cancelarEdicion':
+                    e.preventDefault();
+                    cancelarEdicion();
+                    return;
+                case 'cerrarEtiqueta':
+                    e.preventDefault();
+                    cerrarEtiqueta();
+                    return;
+                case 'guardarConfig':
+                    e.preventDefault();
+                    guardarConfig();
+                    return;
+                case 'abrirConfigConPassword':
+                    e.preventDefault();
+                    abrirConfigConPassword(actionButton);
+                    return;
+            }
+        }
+
         const el = e.target.closest && e.target.closest('.view-sds');
         if (!el) return;
         e.preventDefault();
-const hdsLink = el.getAttribute('data-hds');
+        const hdsLink = el.getAttribute('data-hds');
 
-if (hdsLink && hdsLink !== "#") {
-    window.open(hdsLink, "_blank");
-} else {
-   Swal.fire({
-  icon: 'info',
-  title: 'Sin HDS disponible',
-  text: 'No hay hoja de seguridad asociada a esta sustancia.',
-  confirmButtonColor: '#6b7280'
-});
-}
-
+        if (hdsLink && hdsLink !== "#") {
+            window.open(hdsLink, "_blank");
+        } else {
+           Swal.fire({
+              icon: 'info',
+              title: 'Sin HDS disponible',
+              text: 'No hay hoja de seguridad asociada a esta sustancia.',
+              confirmButtonColor: '#6b7280'
+            });
+        }
     });
 
     
-    document.getElementById('btnParseExcel').addEventListener('click', function() {
+    document.getElementById('loginForm')?.addEventListener('submit', handleLogin);
+    document.getElementById('loginUser')?.addEventListener('input', limpiarLoginError);
+    document.getElementById('loginPass')?.addEventListener('input', limpiarLoginError);
+    document.getElementById('btnParseExcel')?.addEventListener('click', function() {
         const f = document.getElementById('excelFile').files[0];
         if (!f) {
             Swal.fire({ icon: 'warning', title: 'Select a file', text: 'Please choose an Excel file first.' });
@@ -3504,7 +3856,7 @@ async function processBulkImport(rows) {
     actualizarDashboard();
 
     const linksHtml = createdKeys
-      .map(k => `<button class="btn-action" onclick="generarEtiqueta('${k}')">View Label for ${k}</button>`)
+      .map(k => `<button class="btn-action" data-action="generarEtiqueta" data-key="${k}">View Label for ${k}</button>`)
       .join(' ');
 
     container.innerHTML = `
@@ -3609,9 +3961,9 @@ else alto++;
     });
 
     
-    if (window.grafica) window.grafica.destroy();
+    if (grafica) grafica.destroy();
 
-    window.grafica = new Chart(document.getElementById('graficaRiesgo'), {
+    grafica = new Chart(document.getElementById('graficaRiesgo'), {
         type: 'doughnut',
         data: {
             labels: ['Bajo', 'Medio', 'Alto'],
@@ -3872,57 +4224,50 @@ function formatearFecha(fecha) {
 }
 document.addEventListener("keydown", function (e) {
   if (e.key === "Escape") {
+    const modal = document.getElementById('registerUserModal');
+    if (modal && modal.classList.contains('active')) {
+      closeRegisterUserModal();
+      return;
+    }
 
-    
     const etiqueta = document.getElementById("printArea");
     if (etiqueta && etiqueta.style.display === "block") {
       cerrarEtiqueta();
-      return; 
+      return;
     }
 
-    
-    const editKey = document.getElementById("editFirebaseKey").value;
+    const editKey = document.getElementById("editFirebaseKey")?.value;
     if (editKey) {
       cancelarEdicion();
       return;
     }
-
   }
 
-
-  
   if (e.ctrlKey) {
-
-    
     if (e.key.toLowerCase() === "r") {
       e.preventDefault();
       const btn = document.getElementById('regTabBtn');
       if (btn) switchWindow('registro-window', btn);
     }
 
-    
     if (e.key.toLowerCase() === "m") {
       e.preventDefault();
       const btn = document.getElementById('vizTabBtn');
       if (btn) switchWindow('visualizacion-window', btn);
     }
 
-    
     if (e.key.toLowerCase() === "d") {
       e.preventDefault();
       const btn = document.getElementById('dashboardTabBtn');
       if (btn) switchWindow('dashboard-window', btn);
     }
 
-    
     if (e.key.toLowerCase() === "h") {
       e.preventDefault();
       const btn = document.getElementById('auditTabBtn');
       if (btn) switchWindow('auditoria-window', btn);
     }
-
   }
-
 });
 
 
@@ -3974,13 +4319,6 @@ let configRiesgo = {
         medio: 12
     }
 };
-if (riesgo <= configRiesgo.rangos.bajo) {
-    // Bajo
-} else if (riesgo <= configRiesgo.rangos.medio) {
-    // Medio
-} else {
-    // Alto
-}
 function cargarConfigUI() {
     document.getElementById('cfgPeligro').value = configRiesgo.palabra.Peligro;
     document.getElementById('cfgAdvertencia').value = configRiesgo.palabra.Advertencia;
@@ -4078,7 +4416,5 @@ function cargarConfigUI() {
     document.getElementById('cfgBajo').value = configRiesgo.rangos.bajo;
     document.getElementById('cfgMedio').value = configRiesgo.rangos.medio;
 }
+})();
 </script>
-
-</body>
-</html>
