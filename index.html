@@ -193,8 +193,55 @@
         .pdf-status {
             font-size: 12px;
             font-weight: bold;
-            margin-top: 4px;
+            margin-top: 6px;
             color: #7f8c8d;
+            min-height: 18px;
+        }
+
+        .pdf-progress-card {
+            margin-top: 8px;
+            padding: 10px 12px;
+            border: 1px solid rgba(87, 87, 87, 0.16);
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(245,247,250,0.92));
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            display: none;
+        }
+
+        .pdf-progress-card.active {
+            display: block;
+        }
+
+        .pdf-progress-head {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+
+        .pdf-progress-track {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .pdf-progress-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            transition: width 0.25s ease;
+        }
+
+        .pdf-progress-text {
+            margin-top: 6px;
+            font-size: 11px;
+            color: #6b7280;
         }
 
         .checkbox-group {
@@ -1527,6 +1574,16 @@ thead th {
 
                     
                     <div id="pdfStatus" class="pdf-status"></div>
+                    <div id="pdfProgressCard" class="pdf-progress-card">
+                        <div class="pdf-progress-head">
+                            <span class="material-icons" style="font-size: 16px;">description</span>
+                            <span id="pdfProgressLabel">Procesando PDF…</span>
+                        </div>
+                        <div class="pdf-progress-track">
+                            <div id="pdfProgressFill" class="pdf-progress-fill"></div>
+                        </div>
+                        <div id="pdfProgressText" class="pdf-progress-text">Leyendo el documento y extrayendo la información.</div>
+                    </div>
                 </div>
                 
             </div>
@@ -1647,7 +1704,7 @@ thead th {
 </div>
 
             
-<button type="submit" id="btnFormSubmit" class="btn-send" style="display:block; margin: 0 auto;">
+<button type="submit" id="btnFormSubmit" class="btn-out btn-send" style="display:block; margin: 0 auto;">
     CARGAR SUSTANCIA
 </button>
 <button
@@ -2546,22 +2603,42 @@ const mapaPictos = {
 document.getElementById('hdsFile').addEventListener('change', function(e) {
     const file = e.target.files[0];
     const statusDiv = document.getElementById('pdfStatus');
+    const progressCard = document.getElementById('pdfProgressCard');
+    const progressFill = document.getElementById('pdfProgressFill');
+    const progressLabel = document.getElementById('pdfProgressLabel');
+    const progressText = document.getElementById('pdfProgressText');
     
     if (!file || file.type !== "application/pdf") return;
+
+    statusDiv.innerText = "Procesando PDF…";
+    statusDiv.style.color = "var(--primary-color)";
+    progressCard.classList.add('active');
+    progressFill.style.width = '8%';
+    progressLabel.innerText = 'Leyendo documento';
+    progressText.innerText = 'Preparando el archivo para analizar su contenido.';
 
     const fileReader = new FileReader();
 
     fileReader.onload = function() {
         const typedarray = new Uint8Array(this.result);
 
+        progressFill.style.width = '20%';
+        progressLabel.innerText = 'Analizando PDF';
+        progressText.innerText = 'Extrayendo texto de cada página del documento.';
+
         pdfjsLib.getDocument(typedarray).promise.then(function(pdf) {
             let maxPages = pdf.numPages;
             let countPromises = [];
+            let completedPages = 0;
 
             for (let i = 1; i <= maxPages; i++) {
                 countPromises.push(
                     pdf.getPage(i).then(function(page) {
                         return page.getTextContent().then(function(textContent) {
+                            completedPages += 1;
+                            const percent = Math.min(80, 20 + Math.round((completedPages / maxPages) * 60));
+                            progressFill.style.width = percent + '%';
+                            progressText.innerText = `Procesando página ${completedPages} de ${maxPages}…`;
                             return textContent.items.map(item => item.str).join(' ');
                         });
                     })
@@ -2569,6 +2646,9 @@ document.getElementById('hdsFile').addEventListener('change', function(e) {
             }
 
             Promise.all(countPromises).then(function(pageTexts) {
+                progressFill.style.width = '90%';
+                progressLabel.innerText = 'Finalizando';
+                progressText.innerText = 'Organizando la información y completando los campos.';
 
                 let fullText = pageTexts.join(' \n ');
 
@@ -2599,18 +2679,25 @@ document.getElementById('hdsFile').addEventListener('change', function(e) {
                     }
                 }
 
-                // ✅ llenar campos
                 document.getElementById('indicacionesPeligro').value = frasesH.join('\n');
                 document.getElementById('consejosPrudencia').value = frasesP.join('\n');
 
-                if (frasesH.length > 0 || frasesP.length > 0) {
-                    statusDiv.style.color = "#10b981";
-                }
+                
 
+                progressFill.style.width = '100%';
+                progressLabel.innerText = 'Listo';
+                progressText.innerText = 'La información se cargó correctamente.';
+                setTimeout(function() {
+                    progressCard.classList.remove('active');
+                }, 900);
             });
         }).catch(function(err) {
-            statusDiv.innerText = "❌ Error procesando PDF.";
-            statusDiv.style.color = "#dc2626";
+            statusDiv.innerText = '❌ Error procesando PDF.';
+            statusDiv.style.color = '#dc2626';
+            progressLabel.innerText = 'Error';
+            progressText.innerText = 'No se pudo procesar el documento. Intenta nuevamente.';
+            progressFill.style.width = '100%';
+            progressFill.style.background = 'linear-gradient(90deg, #dc2626, #ef4444)';
             console.error(err);
         });
     };
@@ -2680,6 +2767,7 @@ document.getElementById('hdsFile').addEventListener('change', function(e) {
         const consejos = document.getElementById('consejosPrudencia').value;
         const fileInput = document.getElementById('hdsFile');
         const existingHdsUrl = document.getElementById('existingHdsUrl').value || "#";
+        const submitBtn = document.getElementById('btnFormSubmit');
 
         const pictogramasSeleccionados = Array.from(document.querySelectorAll('.picto-chk:checked')).map(cb => {
             return { id: cb.value, fileName: cb.getAttribute('data-file') };
@@ -2688,6 +2776,38 @@ document.getElementById('hdsFile').addEventListener('change', function(e) {
         const areasSeleccionadas = Array.from(document.querySelectorAll('.area-chk:checked')).map(cb => cb.value);
 
         const timestampStr = new Date().toLocaleString();
+        const statusDiv = document.getElementById('pdfStatus');
+        const progressCard = document.getElementById('pdfProgressCard');
+        const progressFill = document.getElementById('pdfProgressFill');
+        const progressLabel = document.getElementById('pdfProgressLabel');
+        const progressText = document.getElementById('pdfProgressText');
+
+        // Deshabilitar el botón para evitar múltiples clics
+        submitBtn.disabled = true;
+        submitBtn.style.opacity = '0.6';
+        submitBtn.style.cursor = 'not-allowed';
+
+        const mostrarProgresoSubida = (porcentaje, label, texto, color = null) => {
+            statusDiv.innerText = label;
+            statusDiv.style.color = "var(--primary-color)";
+            progressCard.classList.add('active');
+            progressFill.style.width = porcentaje + '%';
+            progressFill.style.background = color || 'linear-gradient(90deg, var(--primary-color), var(--accent-color))';
+            progressLabel.innerText = label;
+            progressText.innerText = texto;
+        };
+
+        const ocultarProgresoSubida = () => {
+            setTimeout(() => {
+                progressCard.classList.remove('active');
+            }, 900);
+        };
+
+        const habilitarBoton = () => {
+            submitBtn.disabled = false;
+            submitBtn.style.opacity = '1';
+            submitBtn.style.cursor = 'pointer';
+        };
 
         const guardarSustancia = (hdsUrl) => {
             const fechaPublicacion = document.getElementById('fechaPublicacion').value;
@@ -2749,6 +2869,8 @@ const registroSustancia = {
                         });
 
                         cancelarEdicion();
+                        ocultarProgresoSubida();
+                        habilitarBoton();
                         Swal.fire({
                             icon: 'success',
                             title: 'Sustancia Actualizada',
@@ -2774,6 +2896,8 @@ const registroSustancia = {
                         document.getElementById('sustanciaForm').reset();
                         document.getElementById('pdfStatus').innerText = ""; 
 
+                        ocultarProgresoSubida();
+                        habilitarBoton();
                         Swal.fire({
                             icon: 'success',
                             title: 'Sustancia Registrada',
@@ -2785,6 +2909,9 @@ const registroSustancia = {
                     })
                     .catch((error) => {
                         console.error("Error saving to Firebase:", error);
+                        mostrarProgresoSubida(100, 'Error', 'No se pudo guardar la información.', 'linear-gradient(90deg, #dc2626, #ef4444)');
+                        ocultarProgresoSubida();
+                        habilitarBoton();
                         Swal.fire({
                             icon: 'error',
                             title: 'Storage Error',
@@ -2798,17 +2925,73 @@ const registroSustancia = {
 
 if (fileInput.files.length > 0) {
     const file = fileInput.files[0];
-
     const storageRef = firebase.storage().ref("sds/" + Date.now() + "_" + file.name);
 
-    storageRef.put(file)
-        .then(snapshot => snapshot.ref.getDownloadURL())
-        .then(url => {
-            guardarSustancia(url);
-        })
-        .catch(err => {
-            console.error("Error:", err);
+    mostrarProgresoSubida(0, 'Subiendo PDF', 'Iniciando carga del archivo al almacenamiento...', 'linear-gradient(90deg, var(--primary-color), var(--accent-color))');
+
+    // Si es actualización con PDF anterior, eliminarlo primero
+    const eliminarPDFAnterior = () => {
+        return new Promise((resolve, reject) => {
+            if (editKey && existingHdsUrl && existingHdsUrl !== "#") {
+                try {
+                    const oldFileRef = firebase.storage().refFromURL(existingHdsUrl);
+                    oldFileRef.delete().then(() => {
+                        console.log("PDF anterior eliminado correctamente");
+                        resolve();
+                    }).catch((err) => {
+                        console.warn("Advertencia al eliminar PDF anterior:", err);
+                        resolve(); // Continuar incluso si falla
+                    });
+                } catch (err) {
+                    console.warn("Error al procesar URL anterior:", err);
+                    resolve(); // Continuar incluso si falla
+                }
+            } else {
+                resolve(); // No hay PDF anterior, continuar
+            }
         });
+    };
+
+    // Primero eliminar el anterior, luego subir el nuevo
+    eliminarPDFAnterior().then(() => {
+        const uploadTask = storageRef.put(file);
+
+        uploadTask.on('state_changed', (snapshot) => {
+            const porcentaje = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+            let texto = 'Preparando transmisión del archivo...';
+
+            if (porcentaje < 30) {
+                texto = 'Iniciando carga del PDF...';
+            } else if (porcentaje < 80) {
+                texto = 'Subiendo el archivo al almacenamiento...';
+            } else {
+                texto = 'Finalizando carga y preparando la actualización...';
+            }
+
+            mostrarProgresoSubida(porcentaje, 'Subiendo PDF', `${texto} ${porcentaje}%`, 'linear-gradient(90deg, var(--primary-color), var(--accent-color))');
+        }, (err) => {
+            console.error("Error:", err);
+            mostrarProgresoSubida(100, 'Error', 'No se pudo subir el PDF.', 'linear-gradient(90deg, #dc2626, #ef4444)');
+            ocultarProgresoSubida();
+            habilitarBoton();
+            Swal.fire({
+                icon: 'error',
+                title: 'Error al subir PDF',
+                text: 'No se pudo subir el archivo PDF. Intenta nuevamente.',
+                confirmButtonColor: '#dc2626'
+            });
+        }, () => {
+            uploadTask.snapshot.ref.getDownloadURL().then(url => {
+                mostrarProgresoSubida(100, 'Guardando cambios', 'El archivo ya está listo. Se están guardando los datos...', 'linear-gradient(90deg, var(--success-color), #34d399)');
+                guardarSustancia(url);
+            }).catch(err => {
+                console.error("Error getting download URL:", err);
+                mostrarProgresoSubida(100, 'Error', 'No se pudo obtener la URL del PDF.', 'linear-gradient(90deg, #dc2626, #ef4444)');
+                ocultarProgresoSubida();
+                habilitarBoton();
+            });
+        });
+    });
 
 } else {
     guardarSustancia(existingHdsUrl);
@@ -3149,7 +3332,7 @@ if (areaFiltro) {
         const hdsFileInput = document.getElementById('hdsFile');
         if (hdsFileInput) hdsFileInput.required = false;
         const hdsLabel = document.getElementById('hdsLabel');
-        if (hdsLabel) hdsLabel.innerText = "Update SDS (PDF) [Optional]:";
+        if (hdsLabel) hdsLabel.innerText = "CARGA(PDF):";
         const pdfStatus = document.getElementById('pdfStatus');
         if (pdfStatus) pdfStatus.style.color = "var(--accent-color)";
 
@@ -3195,7 +3378,7 @@ if (areaFiltro) {
     }
 
     
-    function eliminarSustancia(firebaseKey, nombreSustancia, casSustancia) {
+    function eliminarSustancia(firebaseKey, nombreSustancia, casSustancia, hdsUrl) {
         const currentUser = obtenerUsuarioActual();
         const username = currentUser ? currentUser.user : "unknown_user";
 
@@ -3210,35 +3393,58 @@ if (areaFiltro) {
             cancelButtonText: 'Cancelar'
         }).then((result) => {
             if (result.isConfirmed) {
-                db.ref("sustancias/" + firebaseKey).remove()
-                    .then(() => {
-                        const timestampStr = new Date().toLocaleString();
-                        
-                        
-                        db.ref("auditoria").push({
-                            timestamp: timestampStr,
-                            usuario: username,
-                            accion: "ELIMINACIÓN",
-                            sustancia: nombreSustancia,
-                            cas: casSustancia,
-                            detalles: "Eliminada."
-                        });
-
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Borrada!',
-                            text: 'Se elimino de la base de datos la sustancia.',
-                            timer: 1500,
-                            showConfirmButton: false
-                        });
-                    })
-                    .catch(error => {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'No se pudo eliminar la sustancia de la base de datos.'
-                        });
+                const eliminarPDFdeStorage = () => {
+                    return new Promise((resolve) => {
+                        if (hdsUrl && hdsUrl !== "#") {
+                            try {
+                                const fileRef = firebase.storage().refFromURL(hdsUrl);
+                                fileRef.delete().then(() => {
+                                    console.log("PDF eliminado de Storage");
+                                    resolve();
+                                }).catch((err) => {
+                                    console.warn("Advertencia al eliminar PDF:", err);
+                                    resolve();
+                                });
+                            } catch (err) {
+                                console.warn("Error al procesar URL del PDF:", err);
+                                resolve();
+                            }
+                        } else {
+                            resolve();
+                        }
                     });
+                };
+
+                eliminarPDFdeStorage().then(() => {
+                    db.ref("sustancias/" + firebaseKey).remove()
+                        .then(() => {
+                            const timestampStr = new Date().toLocaleString();
+                            
+                            db.ref("auditoria").push({
+                                timestamp: timestampStr,
+                                usuario: username,
+                                accion: "ELIMINACIÓN",
+                                sustancia: nombreSustancia,
+                                cas: casSustancia,
+                                detalles: "Eliminada."
+                            });
+
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Borrada!',
+                                text: 'Se elimino de la base de datos la sustancia.',
+                                timer: 1500,
+                                showConfirmButton: false
+                            });
+                        })
+                        .catch(error => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: 'No se pudo eliminar la sustancia de la base de datos.'
+                            });
+                        });
+                });
             }
         });
     }
@@ -3501,7 +3707,7 @@ window.addEventListener('DOMContentLoaded', async function() {
                         e.preventDefault();
                         const sustancia = listaSustancias.find(s => s.firebaseKey === key);
                         if (sustancia) {
-                            eliminarSustancia(key, sustancia.nombre, sustancia.cas);
+                            eliminarSustancia(key, sustancia.nombre, sustancia.cas, sustancia.hdsUrl);
                         }
                     }
                     return;
