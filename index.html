@@ -1432,19 +1432,18 @@ select:focus-visible, textarea:focus-visible {
 
 .login-overlay {
     background:
-        radial-gradient(ellipse at 15% 15%, rgba(45, 212, 191, 0.18), transparent 35%),
-        radial-gradient(ellipse at 85% 85%, rgba(180, 35, 47, 0.22), transparent 34%),
-        linear-gradient(135deg, #101a2d 0%, #1b2c43 55%, #173c48 100%);
+        radial-gradient(ellipse at 12% 10%, rgba(180, 35, 47, 0.06), transparent 32%),
+        #f4f5f7;
     padding: 24px;
 }
 
 .login-card {
     max-width: 430px;
     padding: 38px;
-    border: 1px solid rgba(255, 255, 255, 0.72);
-    border-top: 4px solid #b4232f;
+    border: 1px solid #e6e8ec;
+    border-top: 5px solid #c8322b;
     border-radius: 22px;
-    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.28);
+    box-shadow: 0 18px 42px rgba(35, 39, 46, 0.16);
 }
 
 .login-card .logo-container img {
@@ -1480,13 +1479,23 @@ select:focus-visible, textarea:focus-visible {
 }
 
 .login-card .login-input-group input:focus {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.12);
+    border-color: #c8322b;
+    box-shadow: 0 0 0 4px rgba(200, 50, 43, 0.12);
+}
+
+.login-card .btn-send {
+    background: #c45f59;
+    box-shadow: 0 5px 12px rgba(166, 27, 41, 0.14);
+}
+
+.login-card .btn-send:hover {
+    background: #a61b29;
+    box-shadow: 0 8px 18px rgba(166, 27, 41, 0.2);
 }
 
 .login-card .register-hint {
     padding-top: 12px;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid #ece1e1;
 }
 
 .login-card .register-hint p {
