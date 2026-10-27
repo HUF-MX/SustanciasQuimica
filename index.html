@@ -1895,6 +1895,33 @@ select:focus-visible, textarea:focus-visible {
     -webkit-line-clamp: 2;
 }
 
+#excelTable .cas-cell.expanded .cas-cell-value {
+    display: block;
+    overflow: visible;
+    -webkit-line-clamp: unset;
+}
+
+#excelTable .cas-toggle {
+    margin-top: 4px;
+    padding: 2px 6px;
+    border: 0;
+    border-radius: 5px;
+    background: #eaf5f3;
+    color: #0f625c;
+    cursor: pointer;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+#excelTable .cas-toggle:hover {
+    background: #d7ece7;
+}
+
+#excelTable .cas-toggle:focus-visible {
+    outline: 2px solid rgba(15, 118, 110, 0.45);
+    outline-offset: 1px;
+}
+
 #excelTable .no-Peligro-text {
     border-radius: 7px;
     background: #e8f5ff;
@@ -4487,11 +4514,24 @@ const btnEtiqueta = `
 
         tr.innerHTML = htmlContenido;
         const casValue = tr.querySelector('.cas-cell-value');
+        const casText = sustancia.cas || '';
         if (casValue) {
-            casValue.textContent = sustancia.cas || '';
-            casValue.title = sustancia.cas || '';
+            casValue.textContent = casText;
         }
         tbody.appendChild(tr);
+        if (casValue && (
+            casText.length > 36 ||
+            (casValue.clientHeight > 0 && casValue.scrollHeight > casValue.clientHeight + 1)
+        )) {
+            const casToggle = document.createElement('button');
+            casToggle.type = 'button';
+            casToggle.className = 'cas-toggle';
+            casToggle.dataset.action = 'toggleCas';
+            casToggle.textContent = 'Ver todos';
+            casToggle.setAttribute('aria-expanded', 'false');
+            casToggle.setAttribute('aria-label', 'Ver todos los números CAS');
+            casValue.parentElement.appendChild(casToggle);
+        }
     });
 
 
@@ -4990,6 +5030,20 @@ window.addEventListener('DOMContentLoaded', async function() {
             const key = actionButton.getAttribute('data-key');
             const targetWindow = actionButton.getAttribute('data-tab');
             switch (action) {
+                case 'toggleCas': {
+                    e.preventDefault();
+                    const casCell = actionButton.closest('.cas-cell');
+                    if (casCell) {
+                        const expanded = casCell.classList.toggle('expanded');
+                        actionButton.textContent = expanded ? 'Mostrar menos' : 'Ver todos';
+                        actionButton.setAttribute('aria-expanded', String(expanded));
+                        actionButton.setAttribute(
+                            'aria-label',
+                            expanded ? 'Mostrar menos números CAS' : 'Ver todos los números CAS'
+                        );
+                    }
+                    return;
+                }
                 case 'generarEtiqueta':
                     if (key) {
                         e.preventDefault();
